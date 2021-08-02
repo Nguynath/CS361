@@ -2,16 +2,22 @@ import mysql.connector
 from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # MySQL Database Connection
-db = mysql.connector.connect(
-    host="us-cdbr-east-04.cleardb.com",
-    user="bd62b1c5c8888c",
-    password="b8f63b60",
-    database="heroku_4cab588d1f5a65c"
-)
+def mysql_connect():
+    try:
+        db = mysql.connector.connect(
+            host="us-cdbr-east-04.cleardb.com",
+            user="bd62b1c5c8888c",
+            password="b8f63b60",
+            database="heroku_4cab588d1f5a65c"
+        )
+    except mysql.connector.error as err:
+        print("Something went wrong: {}".format(err))
 
-mycursor = db.cursor()
+    return db
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -21,6 +27,11 @@ mycursor = db.cursor()
 def load_home(page):
     query = "SELECT * FROM title_info"
     and_count = 0
+
+    # if 'form_titleSearch' in request.args:
+    #     if and_count == 0:
+    #         and_count += 1
+    #         query += ' WHERE (`Title` like '
 
     if 'form_media' in request.args:
         if and_count == 0:
@@ -88,11 +99,14 @@ def load_home(page):
     print(query)
 
     args = (startat, perpage)
+
+    db = mysql_connect()
     mycursor = db.cursor()
     mycursor.execute(query, args)
     titleDetails = mycursor.fetchall()
     db.commit()
     mycursor.close()
+    db.close()
 
     and_count = 0
 
