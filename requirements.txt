@@ -10,8 +10,12 @@ idna==3.2
 itsdangerous==2.0.1
 Jinja2==3.0.1
 MarkupSafe==2.0.1
+mysql-connector==2.2.9
+mysql-connector-python==8.0.26
+protobuf==3.17.3
 python-dateutil==1.5
 requests==2.26.0
+six==1.16.0
 soupsieve==2.2.1
 urllib3==1.26.6
 Werkzeug==2.0.1

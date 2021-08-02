@@ -24,7 +24,7 @@
         </div>
 
         <div class="search-filter">
-          <form>
+          <form method="GET" action="/">
 
             <div id="filter_row_one">
 
@@ -39,17 +39,17 @@
             <div id="filter_row_two">
 
               <span id="filter_media">
-                <input type="radio" id="both" name="form_media" value="HTML">
+                <input type="radio" id="both" name="form_media" value="both">
                 <label for="both">Both</label>
-                <input type="radio" id="movies" name="form_media" value="movies">
+                <input type="radio" id="movies" name="form_media" value="movie">
                 <label for="movies">Movies</label>
-                <input type="radio" id="shows" name="form_media" value="shows">
+                <input type="radio" id="shows" name="form_media" value="show">
                 <label for="shows">Shows</label>
               </span>
 
               <span id="filter_genre">
                 <label for="genre">Genre:</label>
-                <select name="genre" id="genre">
+                <select name="form_genre" id="genre">
                   <option disabled selected value style="display:none"></option>
                   <option value="action">Action</option>
                   <option value="adventure">Adventure</option>
@@ -68,36 +68,36 @@
                   <option value="musical">Musical</option>
                   <option value="mystery">Mystery</option>
                   <option value="romance">Romance</option>
-                  <option value="science">Science</option>
-                  <option value="shortFilm">Short Film</option>
+                  <option value="Sci-Fi">Sci-Fi</option>
+<!--                  <option value="shortFilm">Short Film</option>-->
                   <option value="sport">Sport</option>
-                  <option value="superhero">Superhero</option>
+<!--                  <option value="superhero">Superhero</option>-->
                   <option value="thriller">Thriller</option>
-                  <option value="war">War</option>
-                  <option value="western">Western</option>
+<!--                  <option value="war">War</option>-->
+<!--                  <option value="western">Western</option>-->
                 </select>
               </span>
 
               <span id="filter_rating">
                 <label for="rating">Rating:</label>
-                <select name="rating" id="rating">
+                <select name="form_rating" id="rating">
                   <option disabled selected value style="display:none"></option>
-                  <option value="9to10">9.0 - 10.0</option>
-                  <option value="8to8.9">8.0 - 8.9</option>
-                  <option value="7to7.9">7.0 - 7.9</option>
-                  <option value="6to6.9">6.0 - 6.9</option>
-                  <option value="5to5.9">5.0 - 5.9</option>
-                  <option value="4to4.9">4.0 - 4.9</option>
-                  <option value="3to3.9">3.0 - 3.9</option>
-                  <option value="2to2.9">2.0 - 2.9</option>
-                  <option value="1to1.9">1.0 - 1.9</option>
-                  <option value="0to0.9">0.0 - 0.9</option>
+                  <option value="9">9.0 - 10.0</option>
+                  <option value="8">8.0 - 8.9</option>
+                  <option value="7">7.0 - 7.9</option>
+                  <option value="6">6.0 - 6.9</option>
+                  <option value="5">5.0 - 5.9</option>
+                  <option value="4">4.0 - 4.9</option>
+                  <option value="3">3.0 - 3.9</option>
+                  <option value="2">2.0 - 2.9</option>
+                  <option value="1">1.0 - 1.9</option>
+                  <option value="0">0.0 - 0.9</option>
                 </select>
               </span>
 
               <span id="filter_length">
                 <label for="length">Length:</label>
-                <select name="length" id="length">
+                <select name="form_length" id="length">
                   <option disabled selected value style="display:none"></option>
                   <option value="3plus">3HR +</option>
                   <option value="2to3">2 - 3 HRs</option>
@@ -108,7 +108,7 @@
 
               <span id="filter_releaseYear">
                 <label for="releaseYear">Release Year:</label>
-                <select name="releaseYear" id="releaseYear">
+                <select name="form_releaseYear" id="releaseYear">
                   <option disabled selected value style="display:none"></option>
                   <option value="2013">2013</option>
                   <option value="2014">2014</option>
@@ -122,17 +122,17 @@
                 </select>
               </span>
 
-              <span id="filter_ageRating">
-                <label for="ageRating">Age Rating:</label>
-                <select name="ageRating" id="ageRating">
-                  <option disabled selected value style="display:none"></option>
-                  <option value="g">G</option>
-                  <option value="pg">PG</option>
-                  <option value="pg13">PG-13</option>
-                  <option value="r">R</option>
-                  <option value="nc17">NC-17</option>
-                </select>
-              </span>
+<!--              <span id="filter_ageRating">-->
+<!--                <label for="ageRating">Age Rating:</label>-->
+<!--                <select name="form_ageRating" id="ageRating">-->
+<!--                  <option disabled selected value style="display:none"></option>-->
+<!--                  <option value="g">G</option>-->
+<!--                  <option value="pg">PG</option>-->
+<!--                  <option value="pg13">PG-13</option>-->
+<!--                  <option value="r">R</option>-->
+<!--                  <option value="nc17">NC-17</option>-->
+<!--                </select>-->
+<!--              </span>-->
 
             </div>
 
@@ -147,8 +147,18 @@
               <th>Rating</th>
               <th>Length</th>
               <th>Release Year</th>
-              <th>Age Rating</th>
             </tr>
+
+            {% for title in titleDetails %}
+            <tr>
+              <td><a href="/about/{{title[0]}}" >{{title[1]}}</a></td>
+              <td>{{title[7]}}</td>
+              <td>{{title[4]}}</td>
+              <td>{{title[5]}}</td>
+              <td>{{title[6]}}</td>
+            </tr>
+            {% endfor %}
+
           </table>
         </div>
 
