@@ -2,7 +2,8 @@ import mysql.connector
 from flask import Flask, render_template, url_for, request
 
 app = Flask(__name__)
-
+# ----------------------------------------------------------------------------------------------------------------------
+# MySQL Database Connection
 db = mysql.connector.connect(
     host="us-cdbr-east-04.cleardb.com",
     user="bd62b1c5c8888c",
@@ -13,6 +14,8 @@ db = mysql.connector.connect(
 mycursor = db.cursor()
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+# FLXR Homepage
 @app.route("/", defaults={'page': 0}, methods=["GET", "POST"])
 @app.route('/page<int:page>')
 def load_home(page):
@@ -80,7 +83,7 @@ def load_home(page):
 
     perpage = 100
     startat = page * perpage
-    query += " ORDER BY Position LIMIT %s, %s;"
+    query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
 
     print(query)
 
@@ -88,12 +91,16 @@ def load_home(page):
     mycursor = db.cursor()
     mycursor.execute(query, args)
     titleDetails = mycursor.fetchall()
+    db.commit()
+    mycursor.close()
 
     and_count = 0
 
     return render_template("home.html", titleDetails=titleDetails)
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+# FLXR Title Detail Page
 @app.route("/about/<string:id>", methods=["GET", "POST"])
 def about(id):
     print(id)
@@ -109,5 +116,6 @@ def about(id):
     return render_template("about.html")
 
 
+# ----------------------------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)
