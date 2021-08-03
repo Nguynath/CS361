@@ -1,0 +1,31 @@
+body {
+  margin: 0px;
+  min-width: 1400px;
+  background-color: #0f1923;
+}
+
+#content {
+  font-family: "Lato";
+}
+
+.grid-container {
+  display: grid;
+  grid-auto-columns: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+  grid-auto-flow: column;
+}
+
+/* Header */
+
+.header {
+  grid-area: 1 / 1 / 2 / 11;
+  text-align: left;
+  color: white;
+  background-color: #1f3347;
+  padding: 15px;
+  /opacity: 0.8;
+}
+
+.background {
+  grid-area: 2 / 1 / 3 / 11;
+  background-color: white;
+}

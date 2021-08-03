@@ -66,15 +66,7 @@ body {
   padding-bottom: 5px;
 }
 
-#filter_media {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 75px;
-  padding-left: 75px;
-  border-radius: 10px;
-  border: 1px solid #0f1923;
-}
-
+#filter_media,
 #filter_genre,
 #filter_rating,
 #filter_length,
@@ -91,11 +83,19 @@ body {
 .catalog {
   margin-top: 20px;
   grid-area: 4 / 2 / 5 / 10;
-  background-color: yellow;
+  background-color: grey;
 }
 
 .catalog table {
-  margin-left: 30px;
+  width: 100%;
+}
+
+.catalog table th {
+  text-align: center;
+}
+
+.align_right {
+  text-align: center;
 }
 
 .catalog table th {

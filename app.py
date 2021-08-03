@@ -1,5 +1,6 @@
-import mysql.connector
-from flask import Flask, render_template, url_for, request
+import mysql.connector, requests, urllib.request
+from bs4 import BeautifulSoup
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -25,27 +26,48 @@ def mysql_connect():
 @app.route("/", defaults={'page': 0}, methods=["GET", "POST"])
 @app.route('/page<int:page>')
 def load_home(page):
+
     query = "SELECT * FROM title_info"
     and_count = 0
 
-    # if 'form_titleSearch' in request.args:
-    #     if and_count == 0:
-    #         and_count += 1
-    #         query += ' WHERE (`Title` like '
+    url_dict = {}
 
+    # Title Text Search
+    if 'form_titleSearch' in request.args:
+        text_q = request.args.get('form_titleSearch')
+        if text_q == '':
+            query = "SELECT * FROM title_info"
+        else:
+            if and_count == 0:
+                and_count += 1
+                url_dict['titleSearch'] = text_q
+                query += ' WHERE (`Title` LIKE ' + "'%" + str(text_q) + "%')"
+
+    # Media Filter
     if 'form_media' in request.args:
         if and_count == 0:
             and_count += 1
-            query += ' WHERE (`Title Type` = '
-        media_q = request.args.get('form_media')
-        if media_q == 'both':
-            and_count = 0
-            query = "SELECT * FROM title_info"
-        elif media_q == 'show':
-            query += "'tvSeries' OR `Title Type` = 'tvMiniSeries' OR `Title Type` = 'tvSpecial' OR `Title Type` = 'tvMovie')"
-        elif media_q == 'movie':
-            query += "'movie')"
+            query += " WHERE (`Title Type` = "
+        else:
+            query += " AND (`Title Type` = "
 
+        media_q = request.args.get('form_media')
+        if media_q == 'all':
+            query = "SELECT * FROM title_info"
+            and_count = 0
+        elif media_q == 'movies':
+            query += "'movie')"
+        elif media_q == 'tvMovies':
+            query += "'tvMovie')"
+        elif media_q == 'tvShows':
+            query += "'tvSeries')"
+        elif media_q == 'tvMiniSeries':
+            query += "'tvMiniSeries')"
+        elif media_q == 'tvSpecials':
+            query += "'tvSpecial')"
+        url_dict['mediaSearch'] = str(media_q)
+
+    # Genre Filter
     if 'form_genre' in request.args:
         if and_count == 0:
             and_count += 1
@@ -55,7 +77,9 @@ def load_home(page):
         genre_q = request.args.get('form_genre')
         query += str(genre_q)
         query += "',Genres))"
+        url_dict['genreSearch'] = str(genre_q)
 
+    # Rating Filter
     if 'form_rating' in request.args:
         if and_count == 0:
             and_count += 1
@@ -66,7 +90,9 @@ def load_home(page):
         query += str(rating_q)
         query += ' AND '
         query += str(rating_q + 0.9) + ")"
+        url_dict['ratingSearch'] = str(rating_q)
 
+    # Runtime Filter
     if 'form_length' in request.args:
         if and_count == 0:
             and_count += 1
@@ -82,7 +108,9 @@ def load_home(page):
             query += ' BETWEEN 60 AND 120)'
         elif length_q == 'less1':
             query += ' <= 60)'
+        url_dict['runtimeSearch'] = str(length_q)
 
+    # Release Year Filter
     if 'form_releaseYear' in request.args:
         if and_count == 0:
             and_count += 1
@@ -91,15 +119,39 @@ def load_home(page):
             query += " AND (YEAR(`Release Date`) = "
         releaseYear_q = int(request.args.get('form_releaseYear'))
         query += str(releaseYear_q) + ")"
+        url_dict['releaseYearSearch'] = str(releaseYear_q)
 
+    # Pagination
     perpage = 100
     startat = page * perpage
-    query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
-
-    print(query)
-
     args = (startat, perpage)
 
+    # Sort Buttons/Query Completion
+    if 'sort_media_a' in request.args:
+        query += " ORDER BY `Title Type` ASC LIMIT %s, %s;"
+    elif 'sort_media_d' in request.args:
+        query += " ORDER BY `Title Type` DESC LIMIT %s, %s;"
+    elif 'sort_genres_a' in request.args:
+        query += " ORDER BY `Genres` ASC LIMIT %s, %s;"
+    elif 'sort_genres_d' in request.args:
+        query += " ORDER BY `Genres` DESC LIMIT %s, %s;"
+    elif 'sort_ratings_a' in request.args:
+        query += " ORDER BY `IMDB Rating` ASC LIMIT %s, %s;"
+    elif 'sort_ratings_d' in request.args:
+        query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
+    elif 'sort_runtimes_a' in request.args:
+        query += " ORDER BY `Runtime` ASC LIMIT %s, %s;"
+    elif 'sort_runtimes_d' in request.args:
+        query += " ORDER BY `Runtime` DESC LIMIT %s, %s;"
+    elif 'sort_releaseYear_a' in request.args:
+        query += " ORDER BY `Release Date` ASC LIMIT %s, %s;"
+    elif 'sort_releaseYear_d' in request.args:
+        query += " ORDER BY `Release Date` DESC LIMIT %s, %s;"
+    else:
+        query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
+    print("Query:", query)
+
+    # Database Connect/Execute/Close
     db = mysql_connect()
     mycursor = db.cursor()
     mycursor.execute(query, args)
@@ -108,26 +160,50 @@ def load_home(page):
     mycursor.close()
     db.close()
 
-    and_count = 0
-
-    return render_template("home.html", titleDetails=titleDetails)
+    return render_template("home.html", titleDetails=titleDetails, url_dict=url_dict)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
 # FLXR Title Detail Page
 @app.route("/about/<string:id>", methods=["GET", "POST"])
 def about(id):
-    print(id)
-    if request.method == "POST":
-        userDetails = request.form
-        name = userDetails["name"]
-        email = userDetails["email"]
 
-        mycursor = db.cursor()
-        mycursor.execute("INSERT INTO users(name, email) VALUES (%s, %s)", (name, email))
-        db.commit()
-        mycursor.close()
-    return render_template("about.html")
+    # MySQL Query
+    query = "SELECT URL FROM title_info WHERE `Position` = " + str(id)
+
+    # Database Connect/Execute/Close
+    db = mysql_connect()
+    mycursor = db.cursor()
+    mycursor.execute(query)
+    titleDetails = mycursor.fetchall()
+    db.commit()
+    mycursor.close()
+    db.close()
+
+    # Call Text Scraper/Add to dictionary of data
+    about_dict = {}
+    about_dict['Title'] = scrape_data(titleDetails[0][0])
+
+    return render_template("about.html", about_dict=about_dict)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+
+def scrape_data(url_page):
+
+    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    page = requests.get(url_page, headers=headers)
+    soup = BeautifulSoup(page.content, 'html.parser')
+
+    # Movie/Show Titles
+    title = soup.find("h1").get_text()
+
+    # Image
+    image = str(soup.find("img", class_="ipc-image")['src'])
+    filepath = r"C:\Users\Nathan Nguyen\Documents\Homework\CS361\FLXR\images\scraped_image.jpg"
+    urllib.request.urlretrieve(image, filepath)
+
+    return title
 
 
 # ----------------------------------------------------------------------------------------------------------------------
