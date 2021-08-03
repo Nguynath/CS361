@@ -53,18 +53,19 @@ def load_home(page):
 
         media_q = request.args.get('form_media')
         if media_q == 'all':
-            query = "SELECT * FROM title_info"
-            and_count = 0
+            query += "'Movie' OR 'TV-Movie' OR 'TV-Show' OR 'TV-MiniSeries' OR 'TV-Special' OR 'Short')"
         elif media_q == 'movies':
-            query += "'movie')"
+            query += "'Movie')"
         elif media_q == 'tvMovies':
-            query += "'tvMovie')"
+            query += "'TV-Movie')"
         elif media_q == 'tvShows':
-            query += "'tvSeries')"
+            query += "'TV-Show')"
         elif media_q == 'tvMiniSeries':
-            query += "'tvMiniSeries')"
+            query += "'TV-MiniSeries')"
         elif media_q == 'tvSpecials':
-            query += "'tvSpecial')"
+            query += "'TV-Special')"
+        elif media_q == 'shorts':
+            query += "'Short')"
         url_dict['mediaSearch'] = str(media_q)
 
     # Genre Filter

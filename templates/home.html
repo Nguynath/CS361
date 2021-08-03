@@ -14,157 +14,157 @@
       <div class="grid-container">
 
         <div class="header">
-          <div>FLXR | A Netflix Originals Catalog</div>
+          <div><span style="font-size: 18px;">FLXR</span> | A Netflix Originals Catalog</div>
         </div>
 
         <div class="background">
-          <p>
-            Background goes here.
-          </p>
+          <img style="height:250px;width:" src="https://im4.ezgif.com/tmp/ezgif-4-19192c8c49f9.gif">
         </div>
 
         <div class="search-filter">
           <form method="GET" action="/">
+            <table>
 
-            <div id="filter_row_one">
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                  <input id="submit_btn" type="submit" value="Submit">
+                </td>
+              </tr>
 
-              <input id="submit_btn" type="submit" value="Submit">
+              <tr>
+                <td style="width:25%" id="filter_search">
+                  <input type="text" name="form_titleSearch" placeholder="Search Titles" value="{{url_dict['titleSearch']}}">
+                </td>
 
-            </div>
+                <td style="width:10%" id="filter_media">
+                  <label for="media">Media Type:</label><br>
+                  <select name="form_media" id="media">
+                    <option disabled selected value style="display:none"></option>
+                    <option value="all" {% if url_dict['mediaSearch']=='all' %} selected="selected" {% endif %}>All</option>
+                    <option value="movies" {% if url_dict['mediaSearch']=='movies' %} selected="selected" {% endif %}>Movies</option>
+                    <option value="tvMovies" {% if url_dict['mediaSearch']=='tvMovies' %} selected="selected" {% endif %}>TV-Movie</option>
+                    <option value="tvShows" {% if url_dict['mediaSearch']=='tvShows' %} selected="selected" {% endif %}>TV-Shows</option>
+                    <option value="tvMiniSeries" {% if url_dict['mediaSearch']=='tvMiniSeries' %} selected="selected" {% endif %}>TV-MiniSeries</option>
+                    <option value="tvSpecials" {% if url_dict['mediaSearch']=='tvSpecials' %} selected="selected" {% endif %}>TV-Specials</option>
+                    <option value="shorts" {% if url_dict['mediaSearch']=='shorts' %} selected="selected" {% endif %}>Shorts</option>
+                  </select>
+                  <input name="sort_media_a" type="submit" value="&#8593">
+                  <input name="sort_media_d" type="submit" value="&#8595">
+                </td>
 
-            <br>
-            <br>
+                <td style="width:20%" id="filter_genre">
+                  <label for="genre">Genre:</label><br>
+                  <select name="form_genre" id="genre">
+                    <option disabled selected value style="display:none"></option>
+                    <option value="action" {% if url_dict['genreSearch']=='action' %} selected="selected" {% endif %}>Action</option>
+                    <option value="adventure" {% if url_dict['genreSearch']=='adventure' %} selected="selected" {% endif %}>Adventure</option>
+                    <option value="animation" {% if url_dict['genreSearch']=='animation' %} selected="selected" {% endif %}>Animation</option>
+                    <option value="biography" {% if url_dict['genreSearch']=='biography' %} selected="selected" {% endif %}>Biography</option>
+                    <option value="comedy" {% if url_dict['genreSearch']=='comedy' %} selected="selected" {% endif %}>Comedy</option>
+                    <option value="crime" {% if url_dict['genreSearch']=='crime' %} selected="selected" {% endif %}>Crime</option>
+                    <option value="documentary" {% if url_dict['genreSearch']=='documentary' %} selected="selected" {% endif %}>Documentary</option>
+                    <option value="drama" {% if url_dict['genreSearch']=='drama' %} selected="selected" {% endif %}>Drama</option>
+                    <option value="family" {% if url_dict['genreSearch']=='family' %} selected="selected" {% endif %}>Family</option>
+                    <option value="fantasy" {% if url_dict['genreSearch']=='fantasy' %} selected="selected" {% endif %}>Fantasy</option>
+                    <option value="history" {% if url_dict['genreSearch']=='history' %} selected="selected" {% endif %}>History</option>
+                    <option value="horror" {% if url_dict['genreSearch']=='horror' %} selected="selected" {% endif %}>Horror</option>
+                    <option value="music" {% if url_dict['genreSearch']=='music' %} selected="selected" {% endif %}>Music</option>
+                    <option value="musical" {% if url_dict['genreSearch']=='musical' %} selected="selected" {% endif %}>Musical</option>
+                    <option value="mystery" {% if url_dict['genreSearch']=='mystery' %} selected="selected" {% endif %}>Mystery</option>
+                    <option value="romance" {% if url_dict['genreSearch']=='romance' %} selected="selected" {% endif %}>Romance</option>
+                    <option value="Sci-Fi" {% if url_dict['genreSearch']=='Sci-Fi' %} selected="selected" {% endif %}>Sci-Fi</option>
+                    <option value="sport" {% if url_dict['genreSearch']=='sport' %} selected="selected" {% endif %}>Sport</option>
+                    <option value="thriller" {% if url_dict['genreSearch']=='thriller' %} selected="selected" {% endif %}>Thriller</option>
+                  </select>
+                  <input name="sort_genres_a" type="submit" value="&#8593">
+                  <input name="sort_genres_d" type="submit" value="&#8595">
+                </td>
 
-            <div id="filter_row_two">
+                <td style="width:10%" id="filter_rating">
+                  <label for="rating">Rating:</label><br>
+                  <select name="form_rating" id="rating">
+                    <option disabled selected value style="display:none"></option>
+                    <option value="9" {% if url_dict['ratingSearch']=='9' %} selected="selected" {% endif %}>9.0 - 10.0</option>
+                    <option value="8" {% if url_dict['ratingSearch']=='8' %} selected="selected" {% endif %}>8.0 - 8.9</option>
+                    <option value="7" {% if url_dict['ratingSearch']=='7' %} selected="selected" {% endif %}>7.0 - 7.9</option>
+                    <option value="6" {% if url_dict['ratingSearch']=='6' %} selected="selected" {% endif %}>6.0 - 6.9</option>
+                    <option value="5" {% if url_dict['ratingSearch']=='5' %} selected="selected" {% endif %}>5.0 - 5.9</option>
+                    <option value="4" {% if url_dict['ratingSearch']=='4' %} selected="selected" {% endif %}>4.0 - 4.9</option>
+                    <option value="3" {% if url_dict['ratingSearch']=='3' %} selected="selected" {% endif %}>3.0 - 3.9</option>
+                    <option value="2" {% if url_dict['ratingSearch']=='2' %} selected="selected" {% endif %}>2.0 - 2.9</option>
+                    <option value="1" {% if url_dict['ratingSearch']=='1' %} selected="selected" {% endif %}>1.0 - 1.9</option>
+                    <option value="0" {% if url_dict['ratingSearch']=='0' %} selected="selected" {% endif %}>0.0 - 0.9</option>
+                  </select>
+                  <input name="sort_ratings_a" type="submit" value="&#8593">
+                  <input name="sort_ratings_d" type="submit" value="&#8595">
+                </td>
 
-              <span id="filter_search">
-                <input type="text" name="form_titleSearch" placeholder="Search Titles" value="{{url_dict['titleSearch']}}">
-              </span>
+                <td style="width:10%" id="filter_length">
+                  <label for="length">Length:</label><br>
+                  <select name="form_length" id="length">
+                    <option disabled selected value style="display:none"></option>
+                    <option value="3plus" {% if url_dict['runtimeSearch']=='3plus' %} selected="selected" {% endif %}>3HR +</option>
+                    <option value="2to3" {% if url_dict['runtimeSearch']=='2to3' %} selected="selected" {% endif %}>2 - 3 HRs</option>
+                    <option value="1to2" {% if url_dict['runtimeSearch']=='1to2' %} selected="selected" {% endif %}>1 - 2 HRs</option>
+                    <option value="less1" {% if url_dict['runtimeSearch']=='less1' %} selected="selected" {% endif %}>1HR ></option>
+                  </select>
+                  <input name="sort_runtimes_a" type="submit" value="&#8593">
+                  <input name="sort_runtimes_d" type="submit" value="&#8595">
+                </td>
 
-              <span id="filter_media">
-                <label for="media">Media Type:</label>
-                <select name="form_media" id="media">
-                  <option disabled selected value style="display:none"></option>
-                  <option value="all" {% if url_dict['mediaSearch']=='all' %} selected="selected" {% endif %}>All</option>
-                  <option value="movies" {% if url_dict['mediaSearch']=='movies' %} selected="selected" {% endif %}>Movies</option>
-                  <option value="tvMovies" {% if url_dict['mediaSearch']=='tvMovies' %} selected="selected" {% endif %}>TV-Movie</option>
-                  <option value="tvShows" {% if url_dict['mediaSearch']=='tvShows' %} selected="selected" {% endif %}>TV-Shows</option>
-                  <option value="tvMiniSeries" {% if url_dict['mediaSearch']=='tvMiniSeries' %} selected="selected" {% endif %}>TV-MiniSeries</option>
-                  <option value="tvSpecials" {% if url_dict['mediaSearch']=='tvSpecials' %} selected="selected" {% endif %}>TV-Specials</option>
-                </select>
-                <input name="sort_media_a" type="submit" value="&#8593">
-                <input name="sort_media_d" type="submit" value="&#8595">
-              </span>
+                <td style="width:15%" id="filter_releaseYear">
+                  <label for="releaseYear">Release Year:</label><br>
+                  <select name="form_releaseYear" id="releaseYear">
+                    <option disabled selected value style="display:none"></option>
+                    <option value="2013" {% if url_dict['releaseYearSearch']=='2013' %} selected="selected" {% endif %}>2013</option>
+                    <option value="2014" {% if url_dict['releaseYearSearch']=='2014' %} selected="selected" {% endif %}>2014</option>
+                    <option value="2015" {% if url_dict['releaseYearSearch']=='2015' %} selected="selected" {% endif %}>2015</option>
+                    <option value="2016" {% if url_dict['releaseYearSearch']=='2016' %} selected="selected" {% endif %}>2016</option>
+                    <option value="2017" {% if url_dict['releaseYearSearch']=='2017' %} selected="selected" {% endif %}>2017</option>
+                    <option value="2018" {% if url_dict['releaseYearSearch']=='2018' %} selected="selected" {% endif %}>2018</option>
+                    <option value="2019" {% if url_dict['releaseYearSearch']=='2019' %} selected="selected" {% endif %}>2019</option>
+                    <option value="2020" {% if url_dict['releaseYearSearch']=='2020' %} selected="selected" {% endif %}>2020</option>
+                    <option value="2021" {% if url_dict['releaseYearSearch']=='2021' %} selected="selected" {% endif %}>2021</option>
+                  </select>
+                  <input name="sort_releaseYear_a" type="submit" value="&#8593">
+                  <input name="sort_releaseYear_d" type="submit" value="&#8595">
+                </td>
 
-              <span id="filter_genre">
-                <label for="genre">Genre:</label>
-                <select name="form_genre" id="genre">
-                  <option disabled selected value style="display:none"></option>
-                  <option value="action" {% if url_dict['genreSearch']=='action' %} selected="selected" {% endif %}>Action</option>
-                  <option value="adventure" {% if url_dict['genreSearch']=='adventure' %} selected="selected" {% endif %}>Adventure</option>
-                  <option value="animation" {% if url_dict['genreSearch']=='animation' %} selected="selected" {% endif %}>Animation</option>
-                  <option value="biography" {% if url_dict['genreSearch']=='biography' %} selected="selected" {% endif %}>Biography</option>
-                  <option value="comedy" {% if url_dict['genreSearch']=='comedy' %} selected="selected" {% endif %}>Comedy</option>
-                  <option value="crime" {% if url_dict['genreSearch']=='crime' %} selected="selected" {% endif %}>Crime</option>
-                  <option value="documentary" {% if url_dict['genreSearch']=='documentary' %} selected="selected" {% endif %}>Documentary</option>
-                  <option value="drama" {% if url_dict['genreSearch']=='drama' %} selected="selected" {% endif %}>Drama</option>
-                  <option value="family" {% if url_dict['genreSearch']=='family' %} selected="selected" {% endif %}>Family</option>
-                  <option value="fantasy" {% if url_dict['genreSearch']=='fantasy' %} selected="selected" {% endif %}>Fantasy</option>
-                  <option value="history" {% if url_dict['genreSearch']=='history' %} selected="selected" {% endif %}>History</option>
-                  <option value="horror" {% if url_dict['genreSearch']=='horror' %} selected="selected" {% endif %}>Horror</option>
-                  <option value="music" {% if url_dict['genreSearch']=='music' %} selected="selected" {% endif %}>Music</option>
-                  <option value="musical" {% if url_dict['genreSearch']=='musical' %} selected="selected" {% endif %}>Musical</option>
-                  <option value="mystery" {% if url_dict['genreSearch']=='mystery' %} selected="selected" {% endif %}>Mystery</option>
-                  <option value="romance" {% if url_dict['genreSearch']=='romance' %} selected="selected" {% endif %}>Romance</option>
-                  <option value="Sci-Fi" {% if url_dict['genreSearch']=='Sci-Fi' %} selected="selected" {% endif %}>Sci-Fi</option>
-                  <option value="sport" {% if url_dict['genreSearch']=='sport' %} selected="selected" {% endif %}>Sport</option>
-                  <option value="thriller" {% if url_dict['genreSearch']=='thriller' %} selected="selected" {% endif %}>Thriller</option>
-                </select>
-                <input name="sort_genres_a" type="submit" value="&#8593">
-                <input name="sort_genres_d" type="submit" value="&#8595">
-              </span>
-
-              <span id="filter_rating">
-                <label for="rating">Rating:</label>
-                <select name="form_rating" id="rating">
-                  <option disabled selected value style="display:none"></option>
-                  <option value="9" {% if url_dict['ratingSearch']=='9' %} selected="selected" {% endif %}>9.0 - 10.0</option>
-                  <option value="8" {% if url_dict['ratingSearch']=='8' %} selected="selected" {% endif %}>8.0 - 8.9</option>
-                  <option value="7" {% if url_dict['ratingSearch']=='7' %} selected="selected" {% endif %}>7.0 - 7.9</option>
-                  <option value="6" {% if url_dict['ratingSearch']=='6' %} selected="selected" {% endif %}>6.0 - 6.9</option>
-                  <option value="5" {% if url_dict['ratingSearch']=='5' %} selected="selected" {% endif %}>5.0 - 5.9</option>
-                  <option value="4" {% if url_dict['ratingSearch']=='4' %} selected="selected" {% endif %}>4.0 - 4.9</option>
-                  <option value="3" {% if url_dict['ratingSearch']=='3' %} selected="selected" {% endif %}>3.0 - 3.9</option>
-                  <option value="2" {% if url_dict['ratingSearch']=='2' %} selected="selected" {% endif %}>2.0 - 2.9</option>
-                  <option value="1" {% if url_dict['ratingSearch']=='1' %} selected="selected" {% endif %}>1.0 - 1.9</option>
-                  <option value="0" {% if url_dict['ratingSearch']=='0' %} selected="selected" {% endif %}>0.0 - 0.9</option>
-                </select>
-                <input name="sort_ratings_a" type="submit" value="&#8593">
-                <input name="sort_ratings_d" type="submit" value="&#8595">
-              </span>
-
-              <span id="filter_length">
-                <label for="length">Length:</label>
-                <select name="form_length" id="length">
-                  <option disabled selected value style="display:none"></option>
-                  <option value="3plus" {% if url_dict['runtimeSearch']=='3plus' %} selected="selected" {% endif %}>3HR +</option>
-                  <option value="2to3" {% if url_dict['runtimeSearch']=='2to3' %} selected="selected" {% endif %}>2 - 3 HRs</option>
-                  <option value="1to2" {% if url_dict['runtimeSearch']=='1to2' %} selected="selected" {% endif %}>1 - 2 HRs</option>
-                  <option value="less1" {% if url_dict['runtimeSearch']=='less1' %} selected="selected" {% endif %}>1HR ></option>
-                </select>
-                <input name="sort_runtimes_a" type="submit" value="&#8593">
-                <input name="sort_runtimes_d" type="submit" value="&#8595">
-              </span>
-
-              <span id="filter_releaseYear">
-                <label for="releaseYear">Release Year:</label>
-                <select name="form_releaseYear" id="releaseYear">
-                  <option disabled selected value style="display:none"></option>
-                  <option value="2013" {% if url_dict['releaseYearSearch']=='2013' %} selected="selected" {% endif %}>2013</option>
-                  <option value="2014" {% if url_dict['releaseYearSearch']=='2014' %} selected="selected" {% endif %}>2014</option>
-                  <option value="2015" {% if url_dict['releaseYearSearch']=='2015' %} selected="selected" {% endif %}>2015</option>
-                  <option value="2016" {% if url_dict['releaseYearSearch']=='2016' %} selected="selected" {% endif %}>2016</option>
-                  <option value="2017" {% if url_dict['releaseYearSearch']=='2017' %} selected="selected" {% endif %}>2017</option>
-                  <option value="2018" {% if url_dict['releaseYearSearch']=='2018' %} selected="selected" {% endif %}>2018</option>
-                  <option value="2019" {% if url_dict['releaseYearSearch']=='2019' %} selected="selected" {% endif %}>2019</option>
-                  <option value="2020" {% if url_dict['releaseYearSearch']=='2020' %} selected="selected" {% endif %}>2020</option>
-                  <option value="2021" {% if url_dict['releaseYearSearch']=='2021' %} selected="selected" {% endif %}>2021</option>
-                </select>
-                <input name="sort_releaseYear_a" type="submit" value="&#8593">
-                <input name="sort_releaseYear_d" type="submit" value="&#8595">
-              </span>
-
-<!--              <span id="filter_ageRating">-->
-<!--                <label for="ageRating">Age Rating:</label>-->
-<!--                <select name="form_ageRating" id="ageRating">-->
-<!--                  <option disabled selected value style="display:none"></option>-->
-<!--                  <option value="g">G</option>-->
-<!--                  <option value="pg">PG</option>-->
-<!--                  <option value="pg13">PG-13</option>-->
-<!--                  <option value="r">R</option>-->
-<!--                  <option value="nc17">NC-17</option>-->
-<!--                </select>-->
-<!--              </span>-->
-
-            </div>
-
+                <!--              <span id="filter_ageRating">-->
+                <!--                <label for="ageRating">Age Rating:</label>-->
+                <!--                <select name="form_ageRating" id="ageRating">-->
+                <!--                  <option disabled selected value style="display:none"></option>-->
+                <!--                  <option value="g">G</option>-->
+                <!--                  <option value="pg">PG</option>-->
+                <!--                  <option value="pg13">PG-13</option>-->
+                <!--                  <option value="r">R</option>-->
+                <!--                  <option value="nc17">NC-17</option>-->
+                <!--                </select>-->
+                <!--              </span>-->
+              </tr>
+            </table>
           </form>
         </div>
 
         <div class="catalog">
           <table>
             <tr>
-              <th style="width:30%">Title</th>
-              <th style="width:10%">Media</th>
-              <th style="width:30%">Genre</th>
-              <th style="width:10%">Rating</th>
-              <th style="width:10%">Length</th>
-              <th style="width:10%">Release Year</th>
+              <th style="width:25%">Title</th>
+              <th style="width:10%">Media Type</th>
+              <th style="width:20%">Genre(s)</th>
+              <th style="width:10%">IMDB Rating</th>
+              <th style="width:10%">Length (min)</th>
+              <th style="width:15%">Netflix Release Year</th>
             </tr>
 
             {% for title in titleDetails %}
             <tr>
-              <td onclick="window.location='/about/{{title[0]}}'">{{title[1]}}</td>
+              <td class="title_td" onclick="window.location='/about/{{title[0]}}'">{{title[1]}}</td>
               <td class="align_center">{{title[3]}}</td>
               <td>{{title[7]}}</td>
               <td class="align_center">{{title[4]}}</td>
