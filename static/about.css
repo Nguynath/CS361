@@ -15,7 +15,6 @@ body {
 }
 
 /* Header */
-
 .header {
   grid-area: 1 / 1 / 2 / 11;
   text-align: left;
@@ -28,4 +27,26 @@ body {
 .background {
   grid-area: 2 / 1 / 3 / 11;
   background-color: white;
+}
+
+/* Title Information */
+.titleInformation {
+  grid-area: 3 / 5 / 4 / 9;
+  border: 1px solid white;
+  margin-top: 50px;
+  color: white;
+}
+
+/* Title Image */
+.titleImage {
+  grid-area: 3 / 3 / 4 / 4;
+  margin-top: 50px;
+}
+
+/* Title Summary */
+.titleSummary {
+  grid-area: 4 / 3 / 5 / 9;
+  border: 1px solid white;
+  margin-top: 50px;
+  color: white;
 }

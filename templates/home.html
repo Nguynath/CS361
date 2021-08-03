@@ -154,8 +154,9 @@
         <div class="catalog">
           <table>
             <tr>
-              <th style="width:35%">Title</th>
-              <th style="width:35%">Genre</th>
+              <th style="width:30%">Title</th>
+              <th style="width:10%">Media</th>
+              <th style="width:30%">Genre</th>
               <th style="width:10%">Rating</th>
               <th style="width:10%">Length</th>
               <th style="width:10%">Release Year</th>
@@ -163,11 +164,12 @@
 
             {% for title in titleDetails %}
             <tr>
-              <td><a href="/about/{{title[0]}}">{{title[1]}}</a></td>
+              <td onclick="window.location='/about/{{title[0]}}'">{{title[1]}}</td>
+              <td class="align_center">{{title[3]}}</td>
               <td>{{title[7]}}</td>
-              <td class="align_right">{{title[4]}}</td>
-              <td class="align_right">{{title[5]}}</td>
-              <td class="align_right">{{title[8][:4]}}</td>
+              <td class="align_center">{{title[4]}}</td>
+              <td class="align_center">{{title[5]}}</td>
+              <td class="align_center">{{title[8][:4]}}</td>
             </tr>
             {% endfor %}
 

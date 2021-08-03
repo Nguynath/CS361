@@ -182,7 +182,8 @@ def about(id):
 
     # Call Text Scraper/Add to dictionary of data
     about_dict = {}
-    about_dict['Title'] = scrape_data(titleDetails[0][0])
+    about_dict['Title'], about_dict['imageURL'] = scrape_data(titleDetails[0][0])
+
 
     return render_template("about.html", about_dict=about_dict)
 
@@ -200,10 +201,8 @@ def scrape_data(url_page):
 
     # Image
     image = str(soup.find("img", class_="ipc-image")['src'])
-    filepath = r"C:\Users\Nathan Nguyen\Documents\Homework\CS361\FLXR\images\scraped_image.jpg"
-    urllib.request.urlretrieve(image, filepath)
 
-    return title
+    return title, image
 
 
 # ----------------------------------------------------------------------------------------------------------------------

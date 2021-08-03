@@ -83,18 +83,32 @@ body {
 .catalog {
   margin-top: 20px;
   grid-area: 4 / 2 / 5 / 10;
-  background-color: grey;
 }
 
 .catalog table {
   width: 100%;
+  background-color: #edf2f7;
+  padding: 10px;
+  border-radius: 25px;
+  border: 2px solid white;
 }
 
 .catalog table th {
   text-align: center;
 }
 
-.align_right {
+.catalog table td {
+  padding: 5px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.catalog table td:hover {
+  background-color: #618cb8;
+  cursor: pointer;
+}
+
+.align_center {
   text-align: center;
 }
 
