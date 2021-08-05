@@ -1,4 +1,4 @@
-import mysql.connector, requests, urllib.request
+import mysql.connector, requests, urllib.request, math
 from bs4 import BeautifulSoup
 from flask import Flask, render_template, request
 
@@ -23,9 +23,21 @@ def mysql_connect():
 
 # ----------------------------------------------------------------------------------------------------------------------
 # FLXR Homepage
-@app.route("/", defaults={'page': 0}, methods=["GET", "POST"])
+@app.route("/", defaults={'page': 1}, methods=["GET", "POST"])
 @app.route('/page<int:page>')
 def load_home(page):
+
+    query_request = request.url
+
+    # Remove https
+    if len(query_request) >= 23:
+        for element in query_request:
+            if element != '?':
+                query_request = query_request.replace(str(element), '', 1)
+            else:
+                break
+    else:
+        query_request = ''
 
     query = "SELECT * FROM title_info"
     and_count = 0
@@ -122,11 +134,6 @@ def load_home(page):
         query += str(releaseYear_q) + ")"
         url_dict['releaseYearSearch'] = str(releaseYear_q)
 
-    # Pagination
-    perpage = 100
-    startat = page * perpage
-    args = (startat, perpage)
-
     # Sort Buttons/Query Completion
     if 'sort_media_a' in request.args:
         query += " ORDER BY `Title Type` ASC LIMIT %s, %s;"
@@ -152,16 +159,39 @@ def load_home(page):
         query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
     print("Query:", query)
 
+    # Pagination
+    perpage = 50
+    startat = (page - 1) * perpage
+    args = (startat, perpage)
+    query_size = len(query)
+    query_count = query[:query_size - 13]
+
     # Database Connect/Execute/Close
     db = mysql_connect()
-    mycursor = db.cursor()
+
+    mycursor = db.cursor(buffered=True)
     mycursor.execute(query, args)
     titleDetails = mycursor.fetchall()
+
+    mycursor.execute(query_count)
+    total_row = mycursor.rowcount
+    total_page = math.floor(total_row / perpage)
+    next_page = page + 1
+    prev_page = page - 1
+
     db.commit()
     mycursor.close()
     db.close()
 
-    return render_template("home.html", titleDetails=titleDetails, url_dict=url_dict)
+    return render_template(
+        "home.html",
+        titleDetails=titleDetails,
+        url_dict=url_dict,
+        total_page=total_page,
+        next_page=next_page,
+        prev_page=prev_page,
+        query_request=query_request
+    )
 
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -2,6 +2,9 @@ body {
   margin: 0px;
   min-width: 1400px;
   background-color: #0f1923;
+  background: url("https://i.pinimg.com/originals/8a/21/c0/8a21c069f217aeded9101b119b2251d3.gif") no-repeat ;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 
 #content {
@@ -17,63 +20,101 @@ body {
 /* Header */
 
 .header {
-  grid-area: 1 / 1 / 2 / 11;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  width: 100%;
   text-align: left;
   color: white;
-  background-color: #1f3347;
-  padding: 25px;
-  /opacity: 0.8;
+  background-color: #ffa64d;
+  padding: 35px;
+  opacity: 0.9;
 }
 
-.background {
-  grid-area: 2 / 1 / 3 / 11;
-  margin-left: auto;
-  margin-right: auto;
+.header img {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  display: block;
+  top: 5px;
+  left: 45px;
+}
+
+#header-title {
+  font-size: 20px;
+  letter-spacing: 4px;
+  padding-left: 100px;
+}
+
+#header-title span {
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+/* Instructions */
+
+.instructions {
+  grid-area: 1 / 2 / 2 / 10;
+  margin-top: 150px;
+  background-color: #edf2f7;
+  color: white;
+  text-align: left;
 }
 
 /* Search Filter */
 
 .search-filter {
-  margin-top: 20px;
-  grid-area: 3 / 2 / 4 / 10;
+  margin-top: 50px;
+  grid-area: 2 / 2 / 3 / 10;
   background-color: #edf2f7;
   padding: 10px;
   font-size: 12px;
-  border-radius: 25px;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
   color: #0f1923;
   border: 2px solid white;
+  opacity: 0.90;
 }
 
 .search-filter table {
   width: 100%;
   background-color: #edf2f7;
+  /background-color: #ffa64d;
   padding: 10px;
   border-radius: 25px;
   border: 2px solid white;
 }
 
+.search-filter table caption {
+  font-size: 14px;
+  text-align: left;
+  margin-left: 20px;
+}
+
 /* Catalog */
 
 .catalog {
-  margin-top: 20px;
-  grid-area: 4 / 2 / 5 / 10;
+  margin-top: 5px;
+  grid-area: 3 / 2 / 4 / 10;
 }
 
 .catalog table {
   width: 100%;
   background-color: #edf2f7;
   padding: 10px;
-  border-radius: 25px;
-  border: 2px solid white;
+  opacity: 0.95;
 }
 
 .catalog table th {
+  font-size: 14px;
   text-align: center;
-  padding: 3px;
+  letter-spacing: 2px;
+  background-color: #ffa64d;
+  padding: 5px;
 }
 
 .catalog table td {
-  padding: 5px;
+  padding: 12px;
   background-color: white;
   border-radius: 10px;
   font-size: 14px;
@@ -95,4 +136,26 @@ body {
 .catalog table th {
   border-radius: 10px;
   border: 1px solid black;
+}
+
+/* Pagination */
+.pagination {
+  margin-top: 5px;
+  grid-area: 4 / 2 / 5 / 10;
+  background: white;
+  margin-bottom: 200px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  opacity: 0.90;
+}
+
+.pagination li {
+  display: inline-block;
+  padding: 5px;
+  list-style-type: none;
+  border: 1px solid black;
+}
+
+.pagination div {
+  text-align: center;
 }

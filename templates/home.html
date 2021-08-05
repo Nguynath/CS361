@@ -11,19 +11,23 @@
 
     <div id="content">
 
+      <div class="header">
+        <a href="https://flxr-app.herokuapp.com/">
+          <img title="Return to FLXR Catalog" src="https://img.icons8.com/nolan/64/video-projector.png" />
+        </a>
+        <div id="header-title">FLXR | <span>A Netflix Originals Catalog</span></div>
+      </div>
+
       <div class="grid-container">
 
-        <div class="header">
-          <div><span style="font-size: 18px;">FLXR</span> | A Netflix Originals Catalog</div>
-        </div>
-
-        <div class="background">
-          <img style="height:250px;width:" src="https://im4.ezgif.com/tmp/ezgif-4-19192c8c49f9.gif">
+        <div class="instructions">
         </div>
 
         <div class="search-filter">
           <form method="GET" action="/">
             <table>
+
+              <caption>Search Filter</caption>
 
               <tr>
                 <td></td>
@@ -176,10 +180,35 @@
           </table>
         </div>
 
+        <div class="pagination">
+          <div>
+          <ul>
+            <li class="page-item">
+              {% if prev_page >= 1 %}
+              <a class="page-link" href="/page{{prev_page}}{{query_request}}/" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+              {% endif %}
+            </li>
+
+            {% for page in range(total_page) %}
+            <li class="page-item"><a class="page-link" href="/page{{loop.index}}{{query_request}}">{{loop.index}}</a></li>
+            {% endfor %}
+
+            <li class="page-item">
+              {% if next_page <= total_page %}
+              <a class="page-link" href="/page{{next_page}}{{query_request}}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+              {% endif %}
+            </li>
+          </ul>
+          </div>
+        </div>
       </div>
-
     </div>
-
   </body>
 
 </html>
