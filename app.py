@@ -188,6 +188,7 @@ def load_home(page):
         titleDetails=titleDetails,
         url_dict=url_dict,
         total_page=total_page,
+        total_row=total_row,
         next_page=next_page,
         prev_page=prev_page,
         query_request=query_request

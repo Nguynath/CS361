@@ -1,6 +1,7 @@
+/* Body */
 body {
   margin: 0px;
-  min-width: 1400px;
+  min-width: 1600px;
   background-color: #0f1923;
   background: url("https://i.pinimg.com/originals/8a/21/c0/8a21c069f217aeded9101b119b2251d3.gif") no-repeat ;
   background-size: 100% 100%;
@@ -18,7 +19,6 @@ body {
 }
 
 /* Header */
-
 .header {
   position: fixed;
   top: 0;
@@ -52,7 +52,6 @@ body {
 }
 
 /* Instructions */
-
 .instructions {
   grid-area: 1 / 2 / 2 / 10;
   margin-top: 150px;
@@ -62,12 +61,10 @@ body {
 }
 
 /* Search Filter */
-
 .search-filter {
-  margin-top: 50px;
+  margin-top: 40px;
   grid-area: 2 / 2 / 3 / 10;
   background-color: #edf2f7;
-  padding: 10px;
   font-size: 12px;
   border-top-right-radius: 25px;
   border-top-left-radius: 25px;
@@ -77,12 +74,12 @@ body {
 }
 
 .search-filter table {
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
   width: 100%;
   background-color: #edf2f7;
-  /background-color: #ffa64d;
   padding: 10px;
-  border-radius: 25px;
-  border: 2px solid white;
+  opacity: 0.95;
 }
 
 .search-filter table caption {
@@ -91,8 +88,30 @@ body {
   margin-left: 20px;
 }
 
-/* Catalog */
+.search-filter table td {
+  padding: 12px;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 14px;
+}
 
+.search-filter table td select {
+  border-radius: 10px;
+}
+
+#submit_btn {
+  width: 100%;
+  border-radius: 10px;
+  background: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#submit_btn:hover {
+  background: #ffa64d;
+}
+
+/* Catalog */
 .catalog {
   margin-top: 5px;
   grid-area: 3 / 2 / 4 / 10;
