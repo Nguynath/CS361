@@ -137,10 +137,12 @@
                 <!--                  <option value="nc17">NC-17</option>-->
                 <!--                </select>-->
                 <!--              </span>-->
+
               </tr>
               <tr>
-                <td style="padding:3px;" colspan="5"><i>Showing {{titleDetails|length}} of {{total_row}} entries.</i></td>
-                <td style="padding:3px;"><input id="submit_btn" type="submit" value="Submit"></td>
+                <td style="padding:3px;" colspan="3"><i>Showing {{titleDetails|length}} of {{total_row}} entries.</i></td>
+                <td style="padding:3px;"><input id="reset_btn" onclick="resetFilters" value="Reset Filters"></td>
+                <td style="padding:3px;" colspan="2"><input id="submit_btn" type="submit" value="Submit"></td>
               </tr>
             </table>
           </form>

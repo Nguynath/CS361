@@ -99,7 +99,7 @@ body {
   border-radius: 10px;
 }
 
-#submit_btn {
+#submit_btn, #reset_btn {
   width: 100%;
   border-radius: 10px;
   background: white;
@@ -107,7 +107,7 @@ body {
   letter-spacing: 1px;
 }
 
-#submit_btn:hover {
+#submit_btn:hover, #reset_btn:hover {
   background: #ffa64d;
 }
 
