@@ -28,13 +28,13 @@
             <table>
 
               <tr>
-                <td style="width:23%" id="filter_search">
-                  <input type="text" name="form_titleSearch" placeholder="Search Titles" value="{{url_dict['titleSearch']}}">
+                <td style="width:25%" id="filter_search">
+                  <input type="text" id="textSearch" name="form_titleSearch" placeholder="Search Titles" value="{{url_dict['titleSearch']}}">
                 </td>
 
-                <td style="width:15%" id="filter_media">
-                  <label for="media">Media Type:</label><br>
-                  <select name="form_media" id="media">
+                <td style="width:13%" id="filter_media">
+                  <label for="mediaSearch">Media Type:</label><br>
+                  <select name="form_media" id="mediaSearch">
                     <option disabled selected value style="display:none"></option>
                     <option value="all" {% if url_dict['mediaSearch']=='all' %} selected="selected" {% endif %}>All</option>
                     <option value="movies" {% if url_dict['mediaSearch']=='movies' %} selected="selected" {% endif %}>Movies</option>
@@ -48,9 +48,9 @@
                   <input name="sort_media_d" type="submit" value="&#8595">
                 </td>
 
-                <td style="width:20%" id="filter_genre">
-                  <label for="genre">Genre:</label><br>
-                  <select name="form_genre" id="genre">
+                <td style="width:23%" id="filter_genre">
+                  <label for="genreSearch">Genre:</label><br>
+                  <select name="form_genre" id="genreSearch">
                     <option disabled selected value style="display:none"></option>
                     <option value="action" {% if url_dict['genreSearch']=='action' %} selected="selected" {% endif %}>Action</option>
                     <option value="adventure" {% if url_dict['genreSearch']=='adventure' %} selected="selected" {% endif %}>Adventure</option>
@@ -76,9 +76,9 @@
                   <input name="sort_genres_d" type="submit" value="&#8595">
                 </td>
 
-                <td style="width:14%" id="filter_rating">
-                  <label for="rating">Rating:</label><br>
-                  <select name="form_rating" id="rating">
+                <td style="width:13%" id="filter_rating">
+                  <label for="ratingSearch">Rating:</label><br>
+                  <select name="form_rating" id="ratingSearch">
                     <option disabled selected value style="display:none"></option>
                     <option value="9" {% if url_dict['ratingSearch']=='9' %} selected="selected" {% endif %}>9.0 - 10.0</option>
                     <option value="8" {% if url_dict['ratingSearch']=='8' %} selected="selected" {% endif %}>8.0 - 8.9</option>
@@ -95,9 +95,9 @@
                   <input name="sort_ratings_d" type="submit" value="&#8595">
                 </td>
 
-                <td style="width:14%" id="filter_length">
-                  <label for="length">Length:</label><br>
-                  <select name="form_length" id="length">
+                <td style="width:13%" id="filter_length">
+                  <label for="lengthSearch">Length:</label><br>
+                  <select name="form_length" id="lengthSearch">
                     <option disabled selected value style="display:none"></option>
                     <option value="3plus" {% if url_dict['runtimeSearch']=='3plus' %} selected="selected" {% endif %}>3HR +</option>
                     <option value="2to3" {% if url_dict['runtimeSearch']=='2to3' %} selected="selected" {% endif %}>2 - 3 HRs</option>
@@ -108,9 +108,9 @@
                   <input name="sort_runtimes_d" type="submit" value="&#8595">
                 </td>
 
-                <td style="width:14%" id="filter_releaseYear">
-                  <label for="releaseYear">Release Year:</label><br>
-                  <select name="form_releaseYear" id="releaseYear">
+                <td style="width:13%" id="filter_releaseYear">
+                  <label for="releaseYearSearch">Release Year:</label><br>
+                  <select name="form_releaseYear" id="releaseYearSearch">
                     <option disabled selected value style="display:none"></option>
                     <option value="2013" {% if url_dict['releaseYearSearch']=='2013' %} selected="selected" {% endif %}>2013</option>
                     <option value="2014" {% if url_dict['releaseYearSearch']=='2014' %} selected="selected" {% endif %}>2014</option>
@@ -140,8 +140,10 @@
 
               </tr>
               <tr>
-                <td style="padding:3px;" colspan="3"><i>Showing {{titleDetails|length}} of {{total_row}} entries.</i></td>
-                <td style="padding:3px;"><input id="reset_btn" onclick="resetFilters" value="Reset Filters"></td>
+                <td style="padding:3px;" colspan="3">
+                  <i>Showing entries {{((page - 1) * 50) + 1}} - {{((page - 1) * 50) + titleDetails|length}} of {{total_row}} entries.</i>
+                </td>
+                <td style="padding:3px;"><input id="reset_btn" type="submit" onclick="resetFilters()" value="Reset Filters"></td>
                 <td style="padding:3px;" colspan="2"><input id="submit_btn" type="submit" value="Submit"></td>
               </tr>
             </table>
@@ -151,22 +153,25 @@
         <div class="catalog">
           <table>
             <tr>
-              <th style="width:23%">Title</th>
-              <th style="width:15%">Media Type</th>
-              <th style="width:20%">Genre(s)</th>
-              <th style="width:14%">IMDB Rating</th>
-              <th style="width:14%">Length (min)</th>
-              <th style="width:14%">Netflix Release Year</th>
+              <th style="width:4%">#</th>
+              <th style="width:21%">Title</th>
+              <th style="width:13%">Media Type</th>
+              <th style="width:23%">Genre(s)</th>
+              <th style="width:13%">IMDB Rating</th>
+              <th style="width:13%">Length (min)</th>
+              <th style="width:13%">Netflix Release Year</th>
             </tr>
 
             {% for title in titleDetails %}
             <tr>
+              <td class="align_center">{{loop.index + ((page-1)*50)}}</td>
               <td class="title_td" onclick="window.location='/about/{{title[0]}}'">{{title[1]}}</td>
               <td class="align_center">{{title[3]}}</td>
-              <td>{{title[7]}}</td>
+              <td style="word-wrap: break-word;">{{title[7]}}</td>
               <td class="align_center">{{title[4]}}</td>
               <td class="align_center">{{title[5]}}</td>
-              <td class="align_center">{{title[8][:4]}}</td>
+              <td class="align_center">{{title[6]}}</td>
+<!--              <td class="align_center">{{title[8][:4]}}</td>-->
             </tr>
             {% endfor %}
 
@@ -176,32 +181,56 @@
         <div class="pagination">
           <div>
             <ul>
-              <li class="page-item">
+              <li>
                 {% if prev_page >= 1 %}
-                <a class="page-link" href="/page{{prev_page}}{{query_request}}/" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
+                <a href="/page{{prev_page}}{{query_request}}">
+                  <span>&laquo;</span>
+                  <span>Previous</span>
+                </a>
+                {% else %}
+                <a>
+                  <span>&laquo;</span>
+                  <span>Previous</span>
                 </a>
                 {% endif %}
               </li>
 
               {% for page in range(total_page) %}
-              <li class="page-item"><a class="page-link" href="/page{{loop.index}}{{query_request}}">{{loop.index}}</a></li>
+              <li>
+                <a href="/page{{loop.index}}{{query_request}}">
+                  {{loop.index}}
+                </a>
+              </li>
               {% endfor %}
 
-              <li class="page-item">
+              <li>
                 {% if next_page <= total_page %}
-                <a class="page-link" href="/page{{next_page}}{{query_request}}" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
+                <a href="/page{{next_page}}{{query_request}}">
+                  <span>&raquo;</span>
+                  <span>Next</span>
                 </a>
                 {% endif %}
               </li>
             </ul>
+
           </div>
         </div>
       </div>
     </div>
+
+  <script>
+
+function resetFilters() {
+	document.getElementById('textSearch').value = "";
+	document.getElementById('mediaSearch').value = "";
+	document.getElementById('genreSearch').value = "";
+	document.getElementById('ratingSearch').value = "";
+	document.getElementById('lengthSearch').value = "";
+	document.getElementById('releaseYearSearch').value = "";
+}
+
+  </script>
+
   </body>
 
 </html>

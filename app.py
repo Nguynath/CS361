@@ -1,6 +1,6 @@
-import mysql.connector, requests, urllib.request, math
+import mysql.connector, requests, math
 from bs4 import BeautifulSoup
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
@@ -175,7 +175,7 @@ def load_home(page):
 
     mycursor.execute(query_count)
     total_row = mycursor.rowcount
-    total_page = math.floor(total_row / perpage)
+    total_page = math.floor(total_row / perpage) + 1
     next_page = page + 1
     prev_page = page - 1
 
@@ -187,6 +187,7 @@ def load_home(page):
         "home.html",
         titleDetails=titleDetails,
         url_dict=url_dict,
+        page=page,
         total_page=total_page,
         total_row=total_row,
         next_page=next_page,
@@ -201,7 +202,7 @@ def load_home(page):
 def about(id):
 
     # MySQL Query
-    query = "SELECT URL FROM title_info WHERE `Position` = " + str(id)
+    query = "SELECT * FROM title_info WHERE `Position` = " + str(id)
 
     # Database Connect/Execute/Close
     db = mysql_connect()
@@ -214,29 +215,61 @@ def about(id):
 
     # Call Text Scraper/Add to dictionary of data
     about_dict = {}
-    about_dict['Title'], about_dict['imageURL'] = scrape_data(titleDetails[0][0])
-
+    about_dict['imageURL'] = scrape_image(titleDetails[0][2])
 
     return render_template("about.html", about_dict=about_dict)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
-
-def scrape_data(url_page):
+# Image Scraper (Self)
+def scrape_image(url_page):
 
     headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
     page = requests.get(url_page, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    # Movie/Show Titles
-    title = soup.find("h1").get_text()
-
     # Image
     image = str(soup.find("img", class_="ipc-image")['src'])
 
-    return title, image
+    return image
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# Microservice URL Request
+@app.route("/scrape/<string:processor>", methods=["GET", "POST"])
+def imageScrape(processor):
+
+    # MySQL Query
+    query = "SELECT processorURL FROM processor_info WHERE `processorModel` = " + "'" + str(processor) + "'"
+
+    # Database Connect/Execute/Close
+    db = mysql_connect()
+    mycursor = db.cursor()
+    mycursor.execute(query)
+    URL = mycursor.fetchall()
+    db.commit()
+    mycursor.close()
+    db.close()
+
+    image_URL = microservice_scrape_image(URL[0][0])
+
+    return jsonify(image_URL)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# Image Scraper (Microservice)
+def microservice_scrape_image(url_page):
+
+    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    page = requests.get(url_page, headers=headers)
+    soup = BeautifulSoup(page.content, 'html.parser')
+
+    # Image
+    image = str(soup.find("img", class_="product-view-img-original")['src'])
+
+    return image
+
+# ----------------------------------------------------------------------------------------------------------------------
+
 if __name__ == '__main__':
     app.run(debug=True)

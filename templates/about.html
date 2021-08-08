@@ -11,25 +11,23 @@
 
     <div id="content">
 
+      <div class="header">
+        <a href="https://flxr-app.herokuapp.com/">
+          <img title="Return to FLXR Catalog" src="https://img.icons8.com/nolan/64/video-projector.png" />
+        </a>
+        <div id="header-title">FLXR | <span>A Netflix Originals Catalog</span></div>
+      </div>
+
       <div class="grid-container">
 
-        <div class="header">
-          <a href="https://flxr-app.herokuapp.com/">
-            <img title="Return to FLXR Catalog" src="https://img.icons8.com/nolan/64/video-projector.png"/>
-          </a>
-            <div id="header-title">FLXR | <span>A Netflix Originals Catalog</span></div>
-        </div>
-
-        <div class="background">
-          <p>Background Goes Here</p>
-        </div>
-
         <div class="titleImage">
-          <img src="{{ about_dict['imageURL'] }}" width="300" height="400">
+          <img src="{{ about_dict['imageURL'] }}">
         </div>
 
         <div class="titleInformation">
-          <h1>{{about_dict['Title']}}</h1>
+          <ul>
+            <li><h1>{{about_dict['Title']}}</h1></li>
+          </ul>
         </div>
 
         <div class="titleSummary">

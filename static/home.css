@@ -99,7 +99,12 @@ body {
   border-radius: 10px;
 }
 
+#textSearch {
+  width: 100%;
+}
+
 #submit_btn, #reset_btn {
+  text-align: center;
   width: 100%;
   border-radius: 10px;
   background: white;
@@ -109,6 +114,7 @@ body {
 
 #submit_btn:hover, #reset_btn:hover {
   background: #ffa64d;
+  cursor: pointer;
 }
 
 /* Catalog */
@@ -122,6 +128,7 @@ body {
   background-color: #edf2f7;
   padding: 10px;
   opacity: 0.95;
+  table-layout: fixed;
 }
 
 .catalog table th {
@@ -173,8 +180,19 @@ body {
   padding: 5px;
   list-style-type: none;
   border: 1px solid black;
+  border-radius: 5px;
+}
+
+.pagination li:hover {
+  background: #ffa64d;
+}
+
+.pagination li a {
+  text-decoration: none;
+  color: black;
 }
 
 .pagination div {
   text-align: center;
 }
+
