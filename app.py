@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # MySQL Database Connection
 def mysql_connect():
     try:
@@ -21,6 +22,7 @@ def mysql_connect():
     return db
 
 
+# ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # FLXR Homepage
 @app.route("/", defaults={'page': 1}, methods=["GET", "POST"])
@@ -197,6 +199,7 @@ def load_home(page):
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # FLXR Title Detail Page
 @app.route("/about/<string:id>", methods=["GET", "POST"])
 def about(id):
@@ -217,14 +220,19 @@ def about(id):
     about_dict = {}
     about_dict['imageURL'] = scrape_image(titleDetails[0][2])
 
+    test = requests.get("http://127.0.0.1:5000/scrape/Ryzen_9_5950X")
+    print(test.json())
+
     return render_template("about.html", about_dict=about_dict)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # Image Scraper (Self)
 def scrape_image(url_page):
 
-    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    headers = {
+        "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
     page = requests.get(url_page, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -234,6 +242,7 @@ def scrape_image(url_page):
     return image
 
 
+# ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # Microservice URL Request
 @app.route("/scrape/<string:processor>", methods=["GET", "POST"])
@@ -253,14 +262,18 @@ def imageScrape(processor):
 
     image_URL = microservice_scrape_image(URL[0][0])
 
+    print(image_URL)
+
     return jsonify(image_URL)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # Image Scraper (Microservice)
 def microservice_scrape_image(url_page):
 
-    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    headers = {
+        "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
     page = requests.get(url_page, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -269,6 +282,8 @@ def microservice_scrape_image(url_page):
 
     return image
 
+
+# ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
 if __name__ == '__main__':
