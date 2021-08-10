@@ -50,6 +50,8 @@ def scrape_data(url_list):
     all_releaseYear = []
     all_filmRatings = []
 
+    # Create Dictionary of Values
+
     for url in range(0, len(url_list)):
 
             headers = {

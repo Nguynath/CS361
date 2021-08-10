@@ -137,7 +137,11 @@ def load_home(page):
         url_dict['releaseYearSearch'] = str(releaseYear_q)
 
     # Sort Buttons/Query Completion
-    if 'sort_media_a' in request.args:
+    if 'sort_title_a' in request.args:
+        query += " ORDER BY `Title` ASC LIMIT %s, %s;"
+    elif 'sort_title_d' in request.args:
+        query += " ORDER BY `Title` DESC LIMIT %s, %s;"
+    elif 'sort_media_a' in request.args:
         query += " ORDER BY `Title Type` ASC LIMIT %s, %s;"
     elif 'sort_media_d' in request.args:
         query += " ORDER BY `Title Type` DESC LIMIT %s, %s;"
@@ -159,7 +163,6 @@ def load_home(page):
         query += " ORDER BY `Release Date` DESC LIMIT %s, %s;"
     else:
         query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
-    print("Query:", query)
 
     # Pagination
     perpage = 50
@@ -216,12 +219,11 @@ def about(id):
     mycursor.close()
     db.close()
 
+    print(titleDetails)
+
     # Call Text Scraper/Add to dictionary of data
     about_dict = {}
     about_dict['imageURL'] = scrape_image(titleDetails[0][2])
-
-    test = requests.get("http://127.0.0.1:5000/scrape/Ryzen_9_5950X")
-    print(test.json())
 
     return render_template("about.html", about_dict=about_dict)
 
@@ -261,8 +263,6 @@ def imageScrape(processor):
     db.close()
 
     image_URL = microservice_scrape_image(URL[0][0])
-
-    print(image_URL)
 
     return jsonify(image_URL)
 

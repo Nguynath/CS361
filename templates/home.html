@@ -28,11 +28,14 @@
             <table>
 
               <tr>
-                <td style="width:25%" id="filter_search">
-                  <input type="text" id="textSearch" name="form_titleSearch" placeholder="Search Titles" value="{{url_dict['titleSearch']}}">
+                <td style="width:24%" id="filter_search">
+                  <label for="textSearch">Search Titles:</label><br>
+                  <input type="text" id="textSearch" name="form_titleSearch" value="{{url_dict['titleSearch']}}">
+                  <input name="sort_title_a" type="submit" value="&#8593" title="Ascending">
+                  <input name="sort_title_d" type="submit" value="&#8595" title="Descending">
                 </td>
 
-                <td style="width:13%" id="filter_media">
+                <td style="width:14%" id="filter_media">
                   <label for="mediaSearch">Media Type:</label><br>
                   <select name="form_media" id="mediaSearch">
                     <option disabled selected value style="display:none"></option>
@@ -44,8 +47,8 @@
                     <option value="tvSpecials" {% if url_dict['mediaSearch']=='tvSpecials' %} selected="selected" {% endif %}>TV-Specials</option>
                     <option value="shorts" {% if url_dict['mediaSearch']=='shorts' %} selected="selected" {% endif %}>Shorts</option>
                   </select>
-                  <input name="sort_media_a" type="submit" value="&#8593">
-                  <input name="sort_media_d" type="submit" value="&#8595">
+                  <input name="sort_media_a" type="submit" value="&#8593" title="Ascending">
+                  <input name="sort_media_d" type="submit" value="&#8595" title="Descsending">
                 </td>
 
                 <td style="width:23%" id="filter_genre">
@@ -72,8 +75,8 @@
                     <option value="sport" {% if url_dict['genreSearch']=='sport' %} selected="selected" {% endif %}>Sport</option>
                     <option value="thriller" {% if url_dict['genreSearch']=='thriller' %} selected="selected" {% endif %}>Thriller</option>
                   </select>
-                  <input name="sort_genres_a" type="submit" value="&#8593">
-                  <input name="sort_genres_d" type="submit" value="&#8595">
+                  <input name="sort_genres_a" type="submit" value="&#8593" title="Ascending">
+                  <input name="sort_genres_d" type="submit" value="&#8595" title="Descending">
                 </td>
 
                 <td style="width:13%" id="filter_rating">
@@ -91,8 +94,8 @@
                     <option value="1" {% if url_dict['ratingSearch']=='1' %} selected="selected" {% endif %}>1.0 - 1.9</option>
                     <option value="0" {% if url_dict['ratingSearch']=='0' %} selected="selected" {% endif %}>0.0 - 0.9</option>
                   </select>
-                  <input name="sort_ratings_a" type="submit" value="&#8593">
-                  <input name="sort_ratings_d" type="submit" value="&#8595">
+                  <input name="sort_ratings_a" type="submit" value="&#8593" title="Ascending">
+                  <input name="sort_ratings_d" type="submit" value="&#8595" title="Descending">
                 </td>
 
                 <td style="width:13%" id="filter_length">
@@ -104,8 +107,8 @@
                     <option value="1to2" {% if url_dict['runtimeSearch']=='1to2' %} selected="selected" {% endif %}>1 - 2 HRs</option>
                     <option value="less1" {% if url_dict['runtimeSearch']=='less1' %} selected="selected" {% endif %}>1HR ></option>
                   </select>
-                  <input name="sort_runtimes_a" type="submit" value="&#8593">
-                  <input name="sort_runtimes_d" type="submit" value="&#8595">
+                  <input name="sort_runtimes_a" type="submit" value="&#8593" title="Ascending">
+                  <input name="sort_runtimes_d" type="submit" value="&#8595" title="Descending">
                 </td>
 
                 <td style="width:13%" id="filter_releaseYear">
@@ -122,29 +125,17 @@
                     <option value="2020" {% if url_dict['releaseYearSearch']=='2020' %} selected="selected" {% endif %}>2020</option>
                     <option value="2021" {% if url_dict['releaseYearSearch']=='2021' %} selected="selected" {% endif %}>2021</option>
                   </select>
-                  <input name="sort_releaseYear_a" type="submit" value="&#8593">
-                  <input name="sort_releaseYear_d" type="submit" value="&#8595">
+                  <input name="sort_releaseYear_a" type="submit" value="&#8593" title="Ascending">
+                  <input name="sort_releaseYear_d" type="submit" value="&#8595" title="Descending">
                 </td>
-
-                <!--              <span id="filter_ageRating">-->
-                <!--                <label for="ageRating">Age Rating:</label>-->
-                <!--                <select name="form_ageRating" id="ageRating">-->
-                <!--                  <option disabled selected value style="display:none"></option>-->
-                <!--                  <option value="g">G</option>-->
-                <!--                  <option value="pg">PG</option>-->
-                <!--                  <option value="pg13">PG-13</option>-->
-                <!--                  <option value="r">R</option>-->
-                <!--                  <option value="nc17">NC-17</option>-->
-                <!--                </select>-->
-                <!--              </span>-->
 
               </tr>
               <tr>
                 <td style="padding:3px;" colspan="3">
                   <i>Showing entries {{((page - 1) * 50) + 1}} - {{((page - 1) * 50) + titleDetails|length}} of {{total_row}} entries.</i>
                 </td>
-                <td style="padding:3px;"><input id="reset_btn" onclick="resetFilters()" value="Reset Filters"></td>
-                <td style="padding:3px;" colspan="2"><input id="submit_btn" type="submit" value="Submit"></td>
+                <td id="reset_btn"><input onclick="resetFilters()" value="Reset Filters"></td>
+                <td id="submit_btn" colspan="2"><input type="submit" value="Submit"></td>
               </tr>
             </table>
           </form>
@@ -153,9 +144,9 @@
         <div class="catalog">
           <table>
             <tr>
-              <th style="width:4%">#</th>
-              <th style="width:21%">Title</th>
-              <th style="width:13%">Media Type</th>
+              <th style="width:4%;">#</th>
+              <th style="width:20%">Title</th>
+              <th style="width:14%">Media Type</th>
               <th style="width:23%">Genre(s)</th>
               <th style="width:13%">IMDB Rating</th>
               <th style="width:13%">Length (min)</th>
@@ -171,7 +162,6 @@
               <td class="align_center">{{title[4]}}</td>
               <td class="align_center">{{title[5]}}</td>
               <td class="align_center">{{title[6]}}</td>
-<!--              <td class="align_center">{{title[8][:4]}}</td>-->
             </tr>
             {% endfor %}
 
@@ -218,18 +208,17 @@
       </div>
     </div>
 
-  <script>
+    <script>
+      function resetFilters() {
+        document.getElementById('textSearch').value = "";
+        document.getElementById('mediaSearch').value = "";
+        document.getElementById('genreSearch').value = "";
+        document.getElementById('ratingSearch').value = "";
+        document.getElementById('lengthSearch').value = "";
+        document.getElementById('releaseYearSearch').value = "";
+      }
 
-function resetFilters() {
-	document.getElementById('textSearch').value = "";
-	document.getElementById('mediaSearch').value = "";
-	document.getElementById('genreSearch').value = "";
-	document.getElementById('ratingSearch').value = "";
-	document.getElementById('lengthSearch').value = "";
-	document.getElementById('releaseYearSearch').value = "";
-}
-
-  </script>
+    </script>
 
   </body>
 

@@ -80,12 +80,7 @@ body {
   background-color: #edf2f7;
   padding: 10px;
   opacity: 0.95;
-}
-
-.search-filter table caption {
-  font-size: 14px;
-  text-align: left;
-  margin-left: 20px;
+  table-layout: fixed;
 }
 
 .search-filter table td {
@@ -100,12 +95,13 @@ body {
 }
 
 #textSearch {
-  width: 100%;
+  border-radius: 10px;
 }
 
 #submit_btn, #reset_btn {
   text-align: center;
-  width: 100%;
+  padding:3px;
+  width: 95%;
   border-radius: 10px;
   background: white;
   font-weight: bold;
