@@ -219,11 +219,19 @@ def about(id):
     mycursor.close()
     db.close()
 
-    print(titleDetails)
-
     # Call Text Scraper/Add to dictionary of data
     about_dict = {}
+    about_dict['title'] = titleDetails[0][1]
+    about_dict['url'] = titleDetails[0][2]
     about_dict['imageURL'] = scrape_image(titleDetails[0][2])
+    about_dict['titleType'] = titleDetails[0][3]
+    about_dict['rating'] = titleDetails[0][4]
+    about_dict['length'] = titleDetails[0][5]
+    about_dict['releaseYear'] = titleDetails[0][6]
+    about_dict['genre'] = titleDetails[0][7]
+    about_dict['releaseDate'] = titleDetails[0][8]
+    about_dict['director'] = titleDetails[0][9]
+    about_dict['summary'] = get_summary(titleDetails[0][1])
 
     return render_template("about.html", about_dict=about_dict)
 
@@ -246,7 +254,7 @@ def scrape_image(url_page):
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-# Microservice URL Request
+# Image Scraper Microservice Response
 @app.route("/scrape/<string:processor>", methods=["GET", "POST"])
 def imageScrape(processor):
 
@@ -281,6 +289,18 @@ def microservice_scrape_image(url_page):
     image = str(soup.find("img", class_="product-view-img-original")['src'])
 
     return image
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# Request Text Scraper Microservice
+def get_summary(title):
+
+    title_fixed = title.replace(" ", "_")
+
+    summary = requests.get("https://burnbroo-api.herokuapp.com/summaries/" + title_fixed)
+
+    return summary.json()
 
 
 # ----------------------------------------------------------------------------------------------------------------------

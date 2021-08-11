@@ -134,7 +134,7 @@
                 <td style="padding:3px;" colspan="3">
                   <i>Showing entries {{((page - 1) * 50) + 1}} - {{((page - 1) * 50) + titleDetails|length}} of {{total_row}} entries.</i>
                 </td>
-                <td id="reset_btn"><input onclick="resetFilters()" value="Reset Filters"></td>
+                <td id="reset_btn"><button onclick="resetFilters()">Reset Filters</button></td>
                 <td id="submit_btn" colspan="2"><input type="submit" value="Submit"></td>
               </tr>
             </table>
@@ -145,12 +145,13 @@
           <table>
             <tr>
               <th style="width:4%;">#</th>
-              <th style="width:20%">Title</th>
-              <th style="width:14%">Media Type</th>
-              <th style="width:23%">Genre(s)</th>
-              <th style="width:13%">IMDB Rating</th>
-              <th style="width:13%">Length (min)</th>
-              <th style="width:13%">Netflix Release Year</th>
+              <th style="width:20%">Title
+                <img src="https://img.icons8.com/nolan/64/information.png" title="asdf"/></th>
+              <th style="width:14%">Media Type<img src="https://img.icons8.com/nolan/64/information.png"/></th>
+              <th style="width:23%">Genre(s)<img src="https://img.icons8.com/nolan/64/information.png"/></th>
+              <th style="width:13%">IMDB Rating<img src="https://img.icons8.com/nolan/64/information.png"/></th>
+              <th style="width:13%">Length (min)<img src="https://img.icons8.com/nolan/64/information.png"/></th>
+              <th style="width:13%">Release Year<img src="https://img.icons8.com/nolan/64/information.png"/></th>
             </tr>
 
             {% for title in titleDetails %}

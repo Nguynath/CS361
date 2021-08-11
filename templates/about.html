@@ -20,23 +20,40 @@
 
       <div class="grid-container">
 
+        <div class="backgroundLayer"></div>
+
         <div class="titleImage">
-          <img src="{{ about_dict['imageURL'] }}">
+          <img src="{{about_dict['imageURL']}}">
         </div>
 
         <div class="titleInformation">
           <ul>
-            <li><h1>{{about_dict['Title']}}</h1></li>
+            <li>
+              <h2>{{about_dict['title']}}</h2>
+            </li>
+            <hr>
+            <li>
+              <h4>{{about_dict['titleType']}} | {{about_dict['releaseYear']}} | {{about_dict['length']}} min.</h4>
+            </li>
+            <li>
+              <h4>IMDB Rating | {{about_dict['rating']}} / 10 </h4>
+            </li>
+            <li>
+              <h4>Genre | {{about_dict['genre']}}</h4>
+            </li>
           </ul>
         </div>
 
         <div class="titleSummary">
-          <h1>Summary</h1>
+          <h3>Summary</h3>
+          <hr>
+          <p>{{about_dict['summary']}}</p>
         </div>
 
       </div>
 
     </div>
+
 
   </body>
 
