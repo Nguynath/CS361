@@ -32,16 +32,43 @@
               <h2>{{about_dict['title']}}</h2>
             </li>
             <hr>
-            <li>
-              <h4>{{about_dict['titleType']}} | {{about_dict['releaseYear']}} | {{about_dict['length']}} min.</h4>
-            </li>
-            <li>
-              <h4>IMDB Rating | {{about_dict['rating']}} / 10 </h4>
-            </li>
-            <li>
-              <h4>Genre | {{about_dict['genre']}}</h4>
-            </li>
           </ul>
+        <table>
+          <tr>
+            <td class="leftColumn">Title Type |</td>
+            <td class="rightColumn">{{about_dict['titleType']}}</td>
+          </tr>
+          <tr>
+            <td class="leftColumn">Genre |</td>
+            <td class="rightColumn">{{about_dict['genre']}}</td>
+          </tr>
+          <tr>
+            <td class="leftColumn">Netflix Release Year |</td>
+            <td class="rightColumn">{{about_dict['releaseYear']}}</td>
+          </tr>
+          <tr>
+            <td class="leftColumn">Premiere Date |</td>
+            <td class="rightColumn">{{about_dict['releaseDate']}}</td>
+          </tr>
+          <tr>
+            <td class="leftColumn">Length (min) |</td>
+            <td class="rightColumn">{{about_dict['length']}}</td>
+          </tr>
+          {% if about_dict['director'] != '' %}
+          <tr>
+            <td class="leftColumn">Director |</td>
+            <td class="rightColumn">{{about_dict['director']}}</td>
+          </tr>
+          {% endif %}
+          <tr>
+            <td class="leftColumn">IMDB Rating|</td>
+            <td class="rightColumn">{{about_dict['rating']}} / 10</td>
+          </tr>
+          <tr>
+            <td class="leftColumn">IMDB Link |</td>
+            <td class="rightColumn"><a href="{{about_dict['url']}}">{{about_dict['title']}}</a></td>
+          </tr>
+        </table>
         </div>
 
         <div class="titleSummary">

@@ -146,12 +146,23 @@
             <tr>
               <th style="width:4%;">#</th>
               <th style="width:20%">Title
-                <img src="https://img.icons8.com/nolan/64/information.png" title="asdf"/></th>
-              <th style="width:14%">Media Type<img src="https://img.icons8.com/nolan/64/information.png"/></th>
-              <th style="width:23%">Genre(s)<img src="https://img.icons8.com/nolan/64/information.png"/></th>
-              <th style="width:13%">IMDB Rating<img src="https://img.icons8.com/nolan/64/information.png"/></th>
-              <th style="width:13%">Length (min)<img src="https://img.icons8.com/nolan/64/information.png"/></th>
-              <th style="width:13%">Release Year<img src="https://img.icons8.com/nolan/64/information.png"/></th>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+              </th>
+              <th style="width:14%">Media Type
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+              </th>
+              <th style="width:23%">Genre(s)
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+              </th>
+              <th style="width:13%">IMDB Rating
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+              </th>
+              <th style="width:13%">Length (min)
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+              </th>
+              <th style="width:13%">Release Year
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+              </th>
             </tr>
 
             {% for title in titleDetails %}
@@ -175,11 +186,6 @@
               <li>
                 {% if prev_page >= 1 %}
                 <a href="/page{{prev_page}}{{query_request}}">
-                  <span>&laquo;</span>
-                  <span>Previous</span>
-                </a>
-                {% else %}
-                <a>
                   <span>&laquo;</span>
                   <span>Previous</span>
                 </a>

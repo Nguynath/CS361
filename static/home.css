@@ -193,6 +193,7 @@ body {
 
 .pagination li:hover {
   background: #ffa64d;
+  cursor: pointer;
 }
 
 .pagination li a {
@@ -203,4 +204,3 @@ body {
 .pagination div {
   text-align: center;
 }
-

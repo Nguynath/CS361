@@ -87,6 +87,32 @@ body {
   border-top: 3px solid #8c8b8b;
 }
 
+.titleInformation table {
+  width: 100%;
+  /border: 1px solid black;
+}
+
+.leftColumn {
+  font-weight: bold;
+  width: 30%;
+  /border: 1px solid black;
+  text-align: right;
+  padding: 5px;
+}
+
+.rightColumn {
+  width: 70%;
+  /border: 1px solid black;
+  padding-left: 5px;
+  text-align: left;
+  padding: 5px;
+}
+
+.rightColumn a {
+  text-decoration: none;
+  color: #ffa64d;
+}
+
 /* Title Image */
 .titleImage {
   margin-top: 250px;

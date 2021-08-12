@@ -17,81 +17,202 @@
         </a>
         <div id="header-title">FLXR |
           <span>A Netflix Originals Catalog</span>
-          <div><span>Column Descriptions</span></div>
         </div>
       </div>
 
       <div class="grid-container">
 
+        <div class="backgroundLayer"></div>
+
         <div id="navBar">
           <ul>
-            <li><button onclick="toggleBtn()"class="button" id="titleBtn">Title</button></li>
-            <li><button class="button" id="titleTypeBtn">Title Type</button></li>
-            <li><button class="button" id="genreBtn">Genre</button></li>
-            <li><button class="button" id="ratingBtn">Rating</button></li>
-            <li><button class="button" id="lengthBtn">Length</button></li>
-            <li><button class="button" id="releaseYearBtn">Release Year</button></li>
+            <li><button onclick="toggleBtn('title','descriptionBlock')" class="button">Title</button></li>
+            <li><button onclick="toggleBtn('titleType','descriptionBlock')" class="button">Title Type</button></li>
+            <li><button onclick="toggleBtn('genre','descriptionBlock')" class="button">Genre</button></li>
+            <li><button onclick="toggleBtn('rating','descriptionBlock')" class="button">Rating</button></li>
+            <li><button onclick="toggleBtn('length','descriptionBlock')" class="button">Length</button></li>
+            <li><button onclick="toggleBtn('releaseYear','descriptionBlock')" class="button">Release Year</button></li>
           </ul>
         </div>
 
-        <div id="title">
-          <table>
-            <tr>
-              <td class="column">Title</td>
-              <td class="description">We use the original title of a movie/show in its original language as it appears on screen in the opening credits.</td>
-            </tr>
-          </table>
+        <div id="title" class="descriptionBlock">
+          <h3 class="heading">Title</h3>
+          <hr class="horizontal">
+          <p class="description">IMDB uses the original title of a movie/show in its original language as it appears on screen in the opening credits.<sup>1</sup></p>
+          <div class="reference"><a href="https://help.imdb.com/article/contribution/titles/adding-a-new-title/GNXTSSVTJTFCRZGN#">1 | IMDB Adding a new title</a></div>
         </div>
 
-        <div id="titleType">
-          <table>
-            <tr>
-              <td class="column">Title Type</td>
-              <td class="description">We use the original title of a movie/show in its original language as it appears on screen in the opening credits.</td>
-            </tr>
-          </table>
+        <div id="titleType" class="descriptionBlock">
+          <h3 class="heading">Title Type:</h3>
+          <hr class="horizontal">
+          <p class="description">Netflix's original films also include content that was first screened on cinematic release in other countries or given exclusive broadcast in other territories, and is then described as Netflix original content.<sup>2</sup></p>
+          <div class="reference"><a href="https://en.wikipedia.org/wiki/List_of_Netflix_original_films_(2015%E2%80%932017)">2 | Wikipedia List of Netflix Original Films</a></div>
         </div>
 
-        <div id="genre">
+        <div id="genre" class="descriptionBlock">
+          <h3 class="heading">Genre</h3>
+          <hr class="horizontal">
           <table>
             <tr>
-              <td class="column">Genre</td>
-              <td class="description">We use the original title of a movie/show in its original language as it appears on screen in the opening credits.</td>
+              <td class="column">Action</td>
+              <td class="tableDescription">
+                Should contain numerous scenes where action is spectacular and usually destructive. Often includes non-stop motion, high energy physical stunts, chases, battles, and destructive crises (floods, explosions, natural disasters, fires, etc.) Note: if a movie contains just one action scene (even if prolonged, i.e. airplane-accident) it does not qualify. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Adventure</td>
+              <td class="tableDescription">
+                Should contain numerous consecutive and inter-related scenes of characters participating in hazardous or exciting experiences for a specific goal. Often include searches or expeditions for lost continents and exotic locales, characters embarking in treasure hunt or heroic journeys, travels, and quests for the unknown. Not to be confused with Action, and should only sometimes be supplied with it. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Animation</td>
+              <td class="tableDescription">
+                Over 75% of the title's running time should have scenes that are wholly, or part-animated. Any form of animation is acceptable, e.g., hand-drawn, computer-generated, stop-motion, etc. Puppetry does not count as animation, unless a form of animation such as stop-motion is also applied. Incidental animated sequences should be indicated with the keywords part-animated or animated-sequence instead. Although the overwhelming majority of video games are a form of animation it's okay to forgo this genre when adding them as this is implied by the title type. Objective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Biography</td>
+              <td class="tableDescription">
+                Primary focus is on the depiction of activities and personality of a real person or persons, for some or all of their lifetime. Events in their life may be reenacted, or described in a documentary style. If re-enacted, they should generally follow reasonably close to the factual record, within the limitations of dramatic necessity. A real person in a fictional setting would not qualify a production for this genre. If the focus is primarily on events, rather than a person, use History instead. Objective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Comedy</td>
+              <td class="tableDescription">
+                Virtually all scenes should contain characters participating in humorous or comedic experiences. The comedy can be exclusively for the viewer, at the expense of the characters in the title, or be shared with them. Please submit qualifying keywords to better describe the humor (i.e. spoof, parody, irony, slapstick, satire, black-comedy etc). If the title does not conform to the 'virtually all scenes' guideline then please do not add the comedy genre; instead, submit the same keyword variations described above to signify the comedic elements of the title. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Crime</td>
+              <td class="tableDescription">
+                Whether the protagonists or antagonists are criminals this should contain numerous consecutive and inter-related scenes of characters participating, aiding, abetting, and/or planning criminal behavior or experiences usually for an illicit goal. Not to be confused with Film-Noir, and only sometimes should be supplied with it. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Documentary</td>
+              <td class="tableDescription">
+                Should contain numerous consecutive scenes of real personages and not characters portrayed by actors. This does not include fake or spoof documentaries, which should instead have the fake-documentary keyword. A documentary that includes actors re-creating events should include the keyword "reenactment" so that those actors are not treated as "Himself." This genre should also be applied to all instances of stand-up comedy and concert performances. Objective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Drama</td>
+              <td class="tableDescription">
+                Should contain numerous consecutive scenes of characters portrayed to effect a serious narrative throughout the title, usually involving conflicts and emotions. This can be exaggerated upon to produce melodrama. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Family</td>
+              <td class="tableDescription">
+                Should be universally accepted viewing for a younger audience. e.g., aimed specifically for the education and/or entertainment of children or the entire family. Often features children or relates to them in the context of home and family. Note: Usually, but not always, complementary to Animation. Objective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Fantasy</td>
+              <td class="tableDescription">
+                Should contain numerous consecutive scenes of characters portrayed to effect a magical and/or mystical narrative throughout the title. Usually has elements of magic, supernatural events, mythology, folklore, or exotic fantasy worlds.Note: not to be confused with Sci-Fi which is not usually based in magic or mysticism. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">History</td>
+              <td class="tableDescription">
+                Primary focus is on real-life events of historical significance featuring real-life characters (allowing for some artistic license); in current terms, the sort of thing that might be expected to dominate the front page of a national newspaper for at least a week; for older times, the sort of thing likely to be included in any major history book. While some characters, incidents, and dialog may be fictional, these should be relatively minor points used primarily to bridge gaps in the record. Use of actual persons in an otherwise fictional setting, or of historic events as a backdrop for a fictional story, would not qualify. If the focus is primarily on one person's life and character, rather than events of historical scope, use Biography instead. Objective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Horror</td>
+              <td class="tableDescription">
+                Should contain numerous consecutive scenes of characters effecting a terrifying and/or repugnant narrative throughout the title. Note: not to be confused with Thriller which is not usually based in fear or abhorrence. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Music</td>
+              <td class="tableDescription">
+                Contains significant music-related elements while not actually being a Musical; this may mean a concert, or a story about a band (either fictional or documentary). Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Musical</td>
+              <td class="tableDescription">
+                Should contain several scenes of characters bursting into song aimed at the viewer (this excludes songs performed for the enjoyment of other characters that may be viewing) while the rest of the time, usually but not exclusively, portraying a narrative that alludes to another Genre. Note: not to be added for titles that are simply music related or have music performances in them; e.g., pop concerts do not apply. Also, classical opera, since it is entirely musical, does not apply and should instead be treated as Music. Objective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Mystery</td>
+              <td class="tableDescription">
+                Should contain numerous inter-related scenes of one or more characters endeavoring to widen their knowledge of anything pertaining to themselves or others. Note: Usually, but not always associated with Crime. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Romance</td>
+              <td class="tableDescription">
+                Should contain numerous inter-related scenes of a character and their personal life with emphasis on emotional attachment or involvement with other characters, especially those characterized by a high level of purity and devotion. Note: Reminder, as with all genres if this does not describe the movie wholly, but only certain scenes or a subplot, then it should be submitted as a keyword instead. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Sci-Fi</td>
+              <td class="tableDescription">
+                Numerous scenes, and/or the entire background for the setting of the narrative, should be based on speculative scientific discoveries or developments, environmental changes, space travel, or life on other planets. Subjective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Sport</td>
+              <td class="tableDescription">
+                Focus is on sports or a sporting event, either fictional or actual. This includes fictional stories focused on a particular sport or event, documentaries about sports, and television broadcasts of actual sporting events. In a fictional film, the sport itself can also be fictional, but it should be the primary focus of the film. Objective.<sup>1</sup>
+              </td>
+            </tr>
+            <tr>
+              <td class="column">Thriller</td>
+              <td class="tableDescription">
+                Should contain numerous sensational scenes or a narrative that is sensational or suspenseful. Note: not to be confused with Mystery or Horror, and should only sometimes be accompanied by one (or both). Subjective.<sup>1</sup>
+              </td>
             </tr>
           </table>
+          <div class="reference"><a href="https://help.imdb.com/article/contribution/titles/genres/GZDRMS6R742JRGAG#">1 | IMDB Genres</a></div>
         </div>
 
-        <div id="rating">
-          <table>
-            <tr>
-              <td class="column">Rating</td>
-              <td class="description">We use the original title of a movie/show in its original language as it appears on screen in the opening credits.</td>
-            </tr>
-          </table>
+        <div id="rating" class="descriptionBlock">
+          <h3 class="heading">Rating</h3>
+          <hr class="horizontal">
+          <p class="description">
+            IMDb registered users can cast a vote (from 1 to 10) on every released title in the database. Individual votes are then aggregated and summarized as a single IMDb rating, visible on the title's main page.
+            We take all the individual ratings cast by IMDb registered users and use them to calculate a single rating. We don't use the arithmetic mean (i.e. the sum of all votes divided by the number of votes), although we do display the mean and average votes on the votes breakdown page; instead the rating displayed on a title's page is a weighted average.
+            The IMDb weighted average does not change upon receipt of each new vote, but instead is updated numerous times per day.<sup>1</sup>
+          </p>
+          <div class="reference"><a href="https://help.imdb.com/article/imdb/track-movies-tv/ratings-faq/G67Y87TFYYP6TWAV#">1 | IMDB Ratings FAQ</a></div>
         </div>
 
-        <div id="length">
-          <table>
-            <tr>
-              <td class="column">Length</td>
-              <td class="description">We use the original title of a movie/show in its original language as it appears on screen in the opening credits.</td>
-            </tr>
-          </table>
+        <div id="length" class="descriptionBlock">
+          <h3 class="heading">Running Time:</h3>
+          <hr class="horizontal">
+          <p class="description">
+            The IMDb running times section records the duration in minutes of titles in the database. For theatrical releases the timing begins from the first distributor logo and ends at the last frame of the end credits. If there are any mid or post credits scenes, these should also be included in the running time. For TV-series we prefer to include the time without commercials, but we appreciate such timings are not always easily available so total running times may be submitted instead as long as the attribute (including commercials) is used.
+            We prefer to list one single running time for all titles which corresponds the default running time. This is the running time of the original release version in the country of origin and is indicated by an entry with a blank country field. However the running time of an entire series can be added once the series has completed, the complete running time should be submitted with the attribute (entire series).
+            The primary running time for series should be the duration of one episode, not the whole series. As stated above, the complete running time can be added once the series has completed.<sup>1</sup>
+          </p>
+          <div class="reference"><a href="https://help.imdb.com/article/contribution/titles/running-times/G8UMSUYEDCN3M2K8?ref_=helpms_helpart_inline#">1 | IMDB Running Times</a></div>
+          <br>
         </div>
 
-        <div id="releaseYear">
-          <table>
-            <tr>
-              <td class="column">releaseYear</td>
-              <td class="description">We use the original title of a movie/show in its original language as it appears on screen in the opening credits.</td>
-            </tr>
-          </table>
+        <div id="releaseYear" class="descriptionBlock">
+          <h3 class="heading">Netflix Release Year</h3>
+          <hr class="horizontal">
+          <p class="description">Year the title was released on the Netflix Platform regardless of original production release.</p>
+          <br>
         </div>
 
       </div>
     </div>
 
-    <script>
+    <script language="javascript">
+      function toggleBtn(id_name, class_name) {
+
+        for (let i = 0; i < 6; i++) {
+          document.getElementsByClassName(class_name)[i].style.display = "none";
+        }
+
+        document.getElementById(id_name).style.display = "inline";
+      }
 
     </script>
 
