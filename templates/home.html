@@ -41,8 +41,7 @@
                     <option disabled selected value style="display:none"></option>
                     <option value="all" {% if url_dict['mediaSearch']=='all' %} selected="selected" {% endif %}>All</option>
                     <option value="movies" {% if url_dict['mediaSearch']=='movies' %} selected="selected" {% endif %}>Movies</option>
-                    <option value="tvMovies" {% if url_dict['mediaSearch']=='tvMovies' %} selected="selected" {% endif %}>TV-Movie</option>
-                    <option value="tvShows" {% if url_dict['mediaSearch']=='tvShows' %} selected="selected" {% endif %}>TV-Shows</option>
+                    <option value="tvShows" {% if url_dict['mediaSearch']=='tvShows' %} selected="selected" {% endif %}>TV-Series</option>
                     <option value="tvMiniSeries" {% if url_dict['mediaSearch']=='tvMiniSeries' %} selected="selected" {% endif %}>TV-MiniSeries</option>
                     <option value="tvSpecials" {% if url_dict['mediaSearch']=='tvSpecials' %} selected="selected" {% endif %}>TV-Specials</option>
                     <option value="shorts" {% if url_dict['mediaSearch']=='shorts' %} selected="selected" {% endif %}>Shorts</option>
@@ -133,7 +132,7 @@
               </tr>
               <tr>
                 <td style="padding:3px;" colspan="3">
-                  <i>Showing titles {{((page - 1) * 50) + 1}} - {{((page - 1) * 50) + titleDetails|length}} of {{total_row}} titles found.</i>
+                  <i>Showing titles {{((page - 1) * 50) + 1}} - {{((page - 1) * 50) + title_details|length}} of {{total_row}} titles found.</i>
                   <span style="float:right; font-size: 10px;"><i>*Catalog Last Updated | August 12th, 2021</i></span>
                 </td>
                 <td id="reset_btn"><button onclick="resetFilters()">Reset Filters</button></td>
@@ -148,26 +147,26 @@
             <tr>
               <th style="width:4%;">#</th>
               <th style="width:20%">Title
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="See Column Descriptions"/></a>
               </th>
               <th style="width:14%">Media Type
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="See Column Descriptions"/></a>
               </th>
               <th style="width:23%">Genre(s)
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="See Column Descriptions"/></a>
               </th>
               <th style="width:13%">IMDB Rating
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="See Column Descriptions"/></a>
               </th>
               <th style="width:13%">Length (min)
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="See Column Descriptions"/></a>
               </th>
               <th style="width:13%">Premiere Year
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="See Column Descriptions"/></a>
               </th>
             </tr>
 
-            {% for title in titleDetails %}
+            {% for title in title_details %}
             <tr>
               <td class="align_center">{{loop.index + ((page-1)*50)}}</td>
               <td class="title_td" onclick="window.location='/about/{{title[0]}}'">{{title[1]}}</td>

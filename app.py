@@ -25,10 +25,10 @@ def mysql_connect():
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # Function to submit a query to MySQL
-def mysql_getData(query):
+def mysql_get_data(query):
 
     db = mysql_connect()
-    mycursor = db.cursor()
+    mycursor = db.cursor(buffered=True)
     mycursor.execute(query)
     data = mycursor.fetchall()
     db.commit()
@@ -40,12 +40,8 @@ def mysql_getData(query):
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-# FLXR Homepage
-@app.route("/", defaults={'page': 1}, methods=["GET", "POST"])
-@app.route('/page<int:page>')
-def load_home(page):
-
-    query_request = request.url
+# Function to submit a query to MySQL
+def form_search_query(query_request ):
 
     # Remove https
     if len(query_request) >= 23:
@@ -83,13 +79,11 @@ def load_home(page):
 
         media_q = request.args.get('form_media')
         if media_q == 'all':
-            query += "'Movie' OR 'TV-Movie' OR 'TV-Show' OR 'TV-MiniSeries' OR 'TV-Special' OR 'Short')"
+            query += "'Movie' OR 'TV-Series' OR 'TV-MiniSeries' OR 'TV-Special' OR 'Short')"
         elif media_q == 'movies':
             query += "'Movie')"
-        elif media_q == 'tvMovies':
-            query += "'TV-Movie')"
         elif media_q == 'tvShows':
-            query += "'TV-Show')"
+            query += "'TV-Series')"
         elif media_q == 'tvMiniSeries':
             query += "'TV-MiniSeries')"
         elif media_q == 'tvSpecials':
@@ -145,9 +139,9 @@ def load_home(page):
     if 'form_releaseYear' in request.args:
         if and_count == 0:
             and_count += 1
-            query += " WHERE (YEAR(`Year`) = "
+            query += " WHERE (`Year` = "
         else:
-            query += " AND (YEAR(`Year`) = "
+            query += " AND (`Year` = "
         releaseYear_q = int(request.args.get('form_releaseYear'))
         query += str(releaseYear_q) + ")"
         url_dict['releaseYearSearch'] = str(releaseYear_q)
@@ -180,19 +174,28 @@ def load_home(page):
     else:
         query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
 
+    return query, url_dict
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# FLXR Homepage
+@app.route("/", defaults={'page': 1}, methods=["GET", "POST"])
+@app.route('/page<int:page>')
+def load_home(page):
+
+    query_request = request.url
+    query, url_dict = form_search_query(query_request)
+
     # Pagination
     perpage = 50
-    startat = (page - 1) * perpage
-    args = (startat, perpage)
-    query_size = len(query)
-    query_count = query[:query_size - 13]
+    args = ((page - 1) * perpage, perpage)
+    query_count = query[:len(query) - 13]
 
     # Database Connect/Execute/Close
     db = mysql_connect()
-
     mycursor = db.cursor(buffered=True)
     mycursor.execute(query, args)
-    titleDetails = mycursor.fetchall()
+    title_details = mycursor.fetchall()
 
     mycursor.execute(query_count)
     total_row = mycursor.rowcount
@@ -206,7 +209,7 @@ def load_home(page):
 
     return render_template(
         "home.html",
-        titleDetails=titleDetails,
+        title_details=title_details,
         url_dict=url_dict,
         page=page,
         total_page=total_page,
@@ -236,7 +239,7 @@ def about(id):
     query = "SELECT * FROM title_info WHERE `Position` = " + str(id)
 
     # Database Connect/Execute/Close
-    titleDetails = mysql_getData(query)
+    titleDetails = mysql_get_data(query)
 
     # Create dictionary of Title Information
     about_dict = {}
@@ -278,13 +281,7 @@ def imageScrape(processor):
     query = "SELECT processorURL FROM processor_info WHERE `processorModel` = " + "'" + str(processor) + "'"
 
     # Database Connect/Execute/Close
-    db = mysql_connect()
-    mycursor = db.cursor()
-    mycursor.execute(query)
-    URL = mycursor.fetchall()
-    db.commit()
-    mycursor.close()
-    db.close()
+    URL = mysql_get_data(query)
 
     image_URL = microservice_scrape_image(URL[0][0])
 
@@ -321,6 +318,6 @@ def get_summary(title):
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-
+# Runs script
 if __name__ == '__main__':
     app.run(debug=True)
