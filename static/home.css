@@ -138,6 +138,8 @@ body {
   background-color: #ffa64d;
   padding-top: 5px;
   padding-bottom: 5px;
+  border-radius: 10px;
+  border: none;
 }
 
 .catalog table th img {
@@ -165,11 +167,6 @@ body {
 
 .align_center {
   text-align: center;
-}
-
-.catalog table th {
-  border-radius: 10px;
-  border: 1px solid black;
 }
 
 /* Pagination */

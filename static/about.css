@@ -29,6 +29,28 @@ body {
   z-index: -1;
 }
 
+/* Return */
+.Return {
+  margin-top: 220px;
+  margin-left: 50px;
+  grid-area: 1 / 3 / 4 / 9;
+  z-index; 1;
+}
+
+.Return button {
+  color: white;
+  letter-spacing: 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  text-decoration: none;
+}
+
+.Return button:hover {
+  transition: 1.5s;
+  color: #ffa64d;
+}
+
 /* Header */
 .header {
   position: fixed;

@@ -24,6 +24,22 @@ def mysql_connect():
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
+# Function to submit a query to MySQL
+def mysql_getData(query):
+
+    db = mysql_connect()
+    mycursor = db.cursor()
+    mycursor.execute(query)
+    data = mycursor.fetchall()
+    db.commit()
+    mycursor.close()
+    db.close()
+
+    return data
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # FLXR Homepage
 @app.route("/", defaults={'page': 1}, methods=["GET", "POST"])
 @app.route('/page<int:page>')
@@ -129,9 +145,9 @@ def load_home(page):
     if 'form_releaseYear' in request.args:
         if and_count == 0:
             and_count += 1
-            query += " WHERE (YEAR(`Release Date`) = "
+            query += " WHERE (YEAR(`Year`) = "
         else:
-            query += " AND (YEAR(`Release Date`) = "
+            query += " AND (YEAR(`Year`) = "
         releaseYear_q = int(request.args.get('form_releaseYear'))
         query += str(releaseYear_q) + ")"
         url_dict['releaseYearSearch'] = str(releaseYear_q)
@@ -158,9 +174,9 @@ def load_home(page):
     elif 'sort_runtimes_d' in request.args:
         query += " ORDER BY `Runtime` DESC LIMIT %s, %s;"
     elif 'sort_releaseYear_a' in request.args:
-        query += " ORDER BY `Release Date` ASC LIMIT %s, %s;"
+        query += " ORDER BY `Year` ASC LIMIT %s, %s;"
     elif 'sort_releaseYear_d' in request.args:
-        query += " ORDER BY `Release Date` DESC LIMIT %s, %s;"
+        query += " ORDER BY `Year` DESC LIMIT %s, %s;"
     else:
         query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
 
@@ -220,26 +236,17 @@ def about(id):
     query = "SELECT * FROM title_info WHERE `Position` = " + str(id)
 
     # Database Connect/Execute/Close
-    db = mysql_connect()
-    mycursor = db.cursor()
-    mycursor.execute(query)
-    titleDetails = mycursor.fetchall()
-    db.commit()
-    mycursor.close()
-    db.close()
+    titleDetails = mysql_getData(query)
 
-    # Call Text Scraper/Add to dictionary of data
+    # Create dictionary of Title Information
     about_dict = {}
-    about_dict['title'] = titleDetails[0][1]
-    about_dict['url'] = titleDetails[0][2]
+    keys = ['title', 'url', 'titleType', 'rating', 'length', 'releaseYear', 'genre', 'releaseDate', 'director']
+
+    for value in range(0, 9):
+        about_dict[keys[value]] = titleDetails[0][value + 1]
+
+    # Call Text and Image Scraper Functions
     about_dict['imageURL'] = scrape_image(titleDetails[0][2])
-    about_dict['titleType'] = titleDetails[0][3]
-    about_dict['rating'] = titleDetails[0][4]
-    about_dict['length'] = titleDetails[0][5]
-    about_dict['releaseYear'] = titleDetails[0][6]
-    about_dict['genre'] = titleDetails[0][7]
-    about_dict['releaseDate'] = titleDetails[0][8]
-    about_dict['director'] = titleDetails[0][9]
     about_dict['summary'] = get_summary(titleDetails[0][1])
 
     return render_template("about.html", about_dict=about_dict)
@@ -286,7 +293,7 @@ def imageScrape(processor):
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-# Image Scraper (Microservice)
+# Provide Image Scraper Microservice
 def microservice_scrape_image(url_page):
 
     headers = {

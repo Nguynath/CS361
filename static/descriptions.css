@@ -64,7 +64,7 @@ body {
 
 /* Navigation Bar */
 #navBar {
-  margin-top: 200px;
+  margin-top: 94px;
   grid-area: 1 / 3 / 2 / 9;
   background: #edf2f7;
   opacity: 0.9;
@@ -111,9 +111,12 @@ body {
 
 /* Desciptions */
 
+sup {
+  font-size: 8px;
+}
+
 .reference {
   font-size: 12px;
-  padding-top: 30px;
   padding-left: 30px;
 }
 
@@ -121,6 +124,7 @@ body {
   text-decoration: none;
   font-style: normal;
   color: black;
+  cursor: pointer;
 }
 
 .heading {
@@ -133,7 +137,19 @@ body {
 }
 
 .description {
-  padding-left: 30px;
+  margin-left: 25px;
+}
+
+.descriptionBlock p {
+  font-size: 16px;
+  padding: 15px;
+  border-left: 2px solid #ffa64d;
+}
+
+.descriptionBlock p:hover {
+  transition: 1.5s;
+  border-left: 2px solid #8533ff;
+  background: #e0ccff;
 }
 
 #title {
@@ -161,6 +177,7 @@ body {
 }
 
 .column {
+  width: 150px;
   text-align:right;
   padding: 10px;
   font-weight: bold;

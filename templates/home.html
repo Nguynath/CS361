@@ -112,9 +112,10 @@
                 </td>
 
                 <td style="width:13%" id="filter_releaseYear">
-                  <label for="releaseYearSearch">Release Year:</label><br>
+                  <label for="releaseYearSearch">Netflix Premiere Year:</label><br>
                   <select name="form_releaseYear" id="releaseYearSearch">
                     <option disabled selected value style="display:none"></option>
+                    <option value="2012" {% if url_dict['releaseYearSearch']=='2012' %} selected="selected" {% endif %}>2013</option>
                     <option value="2013" {% if url_dict['releaseYearSearch']=='2013' %} selected="selected" {% endif %}>2013</option>
                     <option value="2014" {% if url_dict['releaseYearSearch']=='2014' %} selected="selected" {% endif %}>2014</option>
                     <option value="2015" {% if url_dict['releaseYearSearch']=='2015' %} selected="selected" {% endif %}>2015</option>
@@ -132,7 +133,8 @@
               </tr>
               <tr>
                 <td style="padding:3px;" colspan="3">
-                  <i>Showing entries {{((page - 1) * 50) + 1}} - {{((page - 1) * 50) + titleDetails|length}} of {{total_row}} entries.</i>
+                  <i>Showing titles {{((page - 1) * 50) + 1}} - {{((page - 1) * 50) + titleDetails|length}} of {{total_row}} titles found.</i>
+                  <span style="float:right; font-size: 10px;"><i>*Catalog Last Updated | August 12th, 2021</i></span>
                 </td>
                 <td id="reset_btn"><button onclick="resetFilters()">Reset Filters</button></td>
                 <td id="submit_btn" colspan="2"><input type="submit" value="Submit"></td>
@@ -146,22 +148,22 @@
             <tr>
               <th style="width:4%;">#</th>
               <th style="width:20%">Title
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
               </th>
               <th style="width:14%">Media Type
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
               </th>
               <th style="width:23%">Genre(s)
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
               </th>
               <th style="width:13%">IMDB Rating
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
               </th>
               <th style="width:13%">Length (min)
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
               </th>
-              <th style="width:13%">Release Year
-                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png" title="asdf" /></a>
+              <th style="width:13%">Premiere Year
+                <a href="/descriptions"><img src="https://img.icons8.com/nolan/64/information.png"/></a>
               </th>
             </tr>
 
@@ -171,7 +173,7 @@
               <td class="title_td" onclick="window.location='/about/{{title[0]}}'">{{title[1]}}</td>
               <td class="align_center">{{title[3]}}</td>
               <td style="word-wrap: break-word;">{{title[7]}}</td>
-              <td class="align_center">{{title[4]}}</td>
+              <td class="align_center">{{title[4]}} / 10</td>
               <td class="align_center">{{title[5]}}</td>
               <td class="align_center">{{title[6]}}</td>
             </tr>
@@ -186,8 +188,7 @@
               <li>
                 {% if prev_page >= 1 %}
                 <a href="/page{{prev_page}}{{query_request}}">
-                  <span>&laquo;</span>
-                  <span>Previous</span>
+                  <span>&laquo; previous</span>
                 </a>
                 {% endif %}
               </li>
@@ -203,8 +204,7 @@
               <li>
                 {% if next_page <= total_page %}
                 <a href="/page{{next_page}}{{query_request}}">
-                  <span>&raquo;</span>
-                  <span>Next</span>
+                  <span>next &raquo;</span>
                 </a>
                 {% endif %}
               </li>

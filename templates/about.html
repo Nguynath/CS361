@@ -20,6 +20,7 @@
 
       <div class="grid-container">
 
+        <div class="Return"><button onclick="history.back()">Return to Catalog</button></div>
         <div class="backgroundLayer"></div>
 
         <div class="titleImage">
@@ -43,16 +44,30 @@
             <td class="rightColumn">{{about_dict['genre']}}</td>
           </tr>
           <tr>
-            <td class="leftColumn">Netflix Release Year |</td>
+            <td class="leftColumn">Netflix Premiere Year |</td>
             <td class="rightColumn">{{about_dict['releaseYear']}}</td>
           </tr>
           <tr>
-            <td class="leftColumn">Premiere Date |</td>
+            <td class="leftColumn">Original Release Date |</td>
             <td class="rightColumn">{{about_dict['releaseDate']}}</td>
           </tr>
           <tr>
-            <td class="leftColumn">Length (min) |</td>
-            <td class="rightColumn">{{about_dict['length']}}</td>
+            <td class="leftColumn">Length |</td>
+            <td class="rightColumn">
+            {% if about_dict['length'] // 60 == 1 %}
+              {{about_dict['length'] // 60}} Hour
+            {% elif about_dict['length'] // 60 == 0 %}
+            {% else %}
+              {{about_dict['length'] // 60}} Hour(s)
+            {% endif %}
+            {% if about_dict['length'] % 60 == 0 %}
+            {% else %}
+              {{about_dict['length'] % 60}} Minute(s)
+            {% endif %}
+            {% if about_dict['titleType'] == 'TV-Show'%}
+              / Episode
+            {% endif %}
+            </td>
           </tr>
           {% if about_dict['director'] != '' %}
           <tr>
@@ -63,10 +78,6 @@
           <tr>
             <td class="leftColumn">IMDB Rating|</td>
             <td class="rightColumn">{{about_dict['rating']}} / 10</td>
-          </tr>
-          <tr>
-            <td class="leftColumn">IMDB Link |</td>
-            <td class="rightColumn"><a href="{{about_dict['url']}}">{{about_dict['title']}}</a></td>
           </tr>
         </table>
         </div>
