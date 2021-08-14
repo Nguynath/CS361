@@ -41,7 +41,9 @@ def mysql_get_data(query):
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 # Function to submit a query to MySQL
-def form_search_query(query_request ):
+def form_search_query(query_request):
+
+    query_request = query_request
 
     # Remove https
     if len(query_request) >= 23:
@@ -174,7 +176,7 @@ def form_search_query(query_request ):
     else:
         query += " ORDER BY `IMDB Rating` DESC LIMIT %s, %s;"
 
-    return query, url_dict
+    return query, url_dict, query_request
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
@@ -184,11 +186,12 @@ def form_search_query(query_request ):
 def load_home(page):
 
     query_request = request.url
-    query, url_dict = form_search_query(query_request)
+    query, url_dict, query_request = form_search_query(query_request)
 
     # Pagination
     perpage = 50
-    args = ((page - 1) * perpage, perpage)
+    startat = (page - 1) * perpage
+    args = (startat, perpage)
     query_count = query[:len(query) - 13]
 
     # Database Connect/Execute/Close
