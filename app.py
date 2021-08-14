@@ -28,7 +28,7 @@ def mysql_connect():
 def mysql_get_data(query):
 
     db = mysql_connect()
-    mycursor = db.cursor(buffered=True)
+    mycursor = db.cursor()
     mycursor.execute(query)
     data = mycursor.fetchall()
     db.commit()
